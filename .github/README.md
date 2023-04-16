@@ -8,12 +8,19 @@ currently hypr focused on arch and hyprland
 TBD
 
 ## Details
+
 Compositor: Hyprland
+
 Bar: Waybar
+
 Notifications: Mako
+
 Terminal: kitty
+
 Dotfiles manager: yadm
+
 Theme: Gruvbox Dark
+
 Editor: Neovim (not configured yet)
 
 ## License
