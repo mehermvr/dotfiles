@@ -1,0 +1,24 @@
+[user]
+    email = rm.meher97@gmail.com
+    name = Meher Malladi
+[core]
+    editor = nvim
+
+[push]
+	default = current
+
+[color]
+    ui = true
+
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    func = 146 bold
+    commit = yellow
+    old = red
+    new = green
+    whitespace = red reverse
+
+[init]
+	defaultBranch = master
+
