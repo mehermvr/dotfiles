@@ -9,6 +9,8 @@ TBD
 
 ## Details
 
+OS: I use Arch btw
+
 Compositor: Hyprland
 
 Bar: Waybar
