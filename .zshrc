@@ -34,3 +34,4 @@ alias cat="bat"
 export EDITOR="vim"
 export PATH="$PATH:/home/corven/.cargo/bin"
 
+eval $(keychain --eval --quiet id_ed25519)
