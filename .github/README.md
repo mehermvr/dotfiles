@@ -2,6 +2,20 @@
 
 currently hypr focused on arch and hyprland
 
+![current setup](current.png)
+
+## setup
+TBD
+
+## Details
+Compositor: Hyprland
+Bar: Waybar
+Notifications: Mako
+Terminal: kitty
+Dotfiles manager: yadm
+Theme: Gruvbox Dark
+Editor: Neovim (not configured yet)
+
 ## License
 
 ```markdown
