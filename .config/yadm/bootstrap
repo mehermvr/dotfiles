@@ -1,0 +1,31 @@
+#!/bin/sh
+
+cd "$HOME"
+
+# we hate submodules around here
+# zsh plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# kitty themeing
+git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
+
+# nerd font setup
+git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts ~/.config/nerd-fonts
+
+cd ~/.config/nerd-fonts
+git sparse-checkout add patched-fonts/Mononoki
+./install.sh Mononoki
+cd $HOME
+
+# git diff-so-fancy setup
+git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fancy
+mkdir -p $HOME/.local/bin
+ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
+
+# powerline10k setup
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+exec zsh
+
+# nvim setup
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
