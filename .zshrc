@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_CUSTOM=/usr/share/zsh
+# ZSH_CUSTOM=/usr/share/zsh
 ZSH_THEME="agnoster"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -28,10 +28,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
-alias cat="bat"
+
+if command -v nvim &> /dev/null
+then
+	alias vim="nvim"
+else
+	echo "nvim could not be found, not aliasing it to vim"
+fi
+
+if command -v bat &> /dev/null
+then
+	alias cat="bat"
+else
+	# TODO: possibly installed as batcat? need to add
+	echo "bat could not be found, not aliasing it to cat"
+fi
+
+alias gs="git status"
 
 export EDITOR="vim"
-export PATH="$PATH:/home/corven/.cargo/bin"
-
-eval $(keychain --eval --quiet id_ed25519)
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export LOG_DIR="/export/data/meher/logs"
+export DATA_DIR="/export/data/meher/data"
+# eval $(keychain --eval --quiet id_ed25519)
