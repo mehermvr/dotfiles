@@ -1,17 +1,25 @@
-# Path to your oh-my-zsh installation.
+if command -v keychain &> /dev/null
+then
+  eval $(keychain --eval --quiet id_ed25519)
+else
+	# TODO: setup gpg key stuff 
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ZSH="$HOME/.oh-my-zsh"
-# ZSH_CUSTOM=/usr/share/zsh
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile)
 
 source $ZSH/oh-my-zsh.sh
@@ -19,15 +27,18 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+export EDITOR="vim"
+PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.local/bin"
+export LOG_DIR="/export/data/meher/logs"
+export DATA_DIR="/export/data/meher/data"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gs="git status"
+alias pscp="rsync -azrvuh --progress"
 
 if command -v nvim &> /dev/null
 then
@@ -44,13 +55,5 @@ else
 	echo "bat could not be found, not aliasing it to cat"
 fi
 
-alias gs="git status"
-alias pscp="rsync -azrvuh --progress"
-
-export EDITOR="vim"
-PATH="$PATH:$HOME/.cargo/bin"
-PATH="$PATH:$HOME/.local/bin"
-export LOG_DIR="/export/data/meher/logs"
-export DATA_DIR="/export/data/meher/data"
-# export GIT_DIR="$HOME/git"
-# eval $(keychain --eval --quiet id_ed25519)
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
