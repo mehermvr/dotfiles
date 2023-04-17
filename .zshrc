@@ -45,10 +45,12 @@ else
 fi
 
 alias gs="git status"
+alias pscp="rsync -azrvuh --progress"
 
 export EDITOR="vim"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.local/bin"
 export LOG_DIR="/export/data/meher/logs"
 export DATA_DIR="/export/data/meher/data"
+# export GIT_DIR="$HOME/git"
 # eval $(keychain --eval --quiet id_ed25519)
