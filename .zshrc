@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-export EDITOR="vim"
+export EDITOR="nvim"
 PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 export LOG_DIR="/export/data/meher/logs"
@@ -51,9 +51,25 @@ if command -v bat &> /dev/null
 then
 	alias cat="bat"
 else
-	# TODO: possibly installed as batcat? need to add
-	echo "bat could not be found, not aliasing it to cat"
+	if command -v batcat &> /dev/null
+	then
+		alias cat="batcat"
+	else
+		echo "bat could not be found, not aliasing it to cat"
+
+	fi
 fi
+
+alias gs="git status"
+alias gf="git fetch"
+alias gfs="git fetch && git status"
+alias gp="git pull --rebase"
+alias gcp="git commit && git push"
+alias tb_here="tensorboard --logdir ."
+alias optdash_here="optuna-dashboard sqlite:///db.sqlite3"
+# useful when the remote doesn't have kitty terminfo files, if you see some error about terminal unknown crap
+alias ssh_kitty='kitty +kitten ssh'
+export BAT_THEME="gruvbox-dark"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
