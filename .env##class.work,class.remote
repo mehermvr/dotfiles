@@ -1,0 +1,15 @@
+# User configuration
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.local/bin"
+export EDITOR="vim"
+export BAT_THEME="gruvbox-dark"
+export LOG_DIR=/export/data/meher/logs
+export DATA_DIR=/export/data/meher/data
+
+# virtualenvwrapper setup
+# export WORKON_HOME=$HOME/work/virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+# export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
+# source $HOME/.local/bin/virtualenvwrapper.sh
