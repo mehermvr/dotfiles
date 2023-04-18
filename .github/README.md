@@ -6,7 +6,9 @@ currently hypr focused on arch and hyprland
 
 ## setup
 TBD
-
+```bash
+sh -c "$(https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/tools/install.sh)"
+```
 ## Details
 
 OS: I use Arch btw
