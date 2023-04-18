@@ -22,6 +22,11 @@ git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fan
 mkdir -p $HOME/.local/bin
 ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
 
+# setup esh
+git clone https://github.com/jirutka/esh.git ~/.local/src/esh
+ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
+
+
 # powerline10k setup
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 exec zsh
