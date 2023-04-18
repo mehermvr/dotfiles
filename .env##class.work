@@ -8,3 +8,6 @@ export BAT_THEME="gruvbox-dark"
 export LOG_DIR="$HOME/work/data/logs"
 export DATA_DIR="$HOME/work/data/"
 
+# virtualenvwrapper setup
+export WORKON_HOME=$HOME/work/virtualenvs
+source /.local/bin/virtualenvwrapper.sh
