@@ -32,12 +32,15 @@ PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 export LOG_DIR="/export/data/meher/logs"
 export DATA_DIR="/export/data/meher/data"
+export BAT_THEME="gruvbox-dark"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export BAT_THEME="gruvbox-dark"
+if [ -f ~/.cudarc ]; then
+    . ~/.cudarc
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

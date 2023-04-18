@@ -1,0 +1,4 @@
+# cuda relevant rc stuff
+export PATH=/usr/local/cuda-12.0/bin${PATH:+:${PATH}}
+# dont know about the following one. theres not really any bins there
+export PATH=/opt/nvidia/nsight-compute${PATH:+:${PATH}}
