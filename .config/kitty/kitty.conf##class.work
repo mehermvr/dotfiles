@@ -1,0 +1,11 @@
+include ~/.config/kitty-themes/themes/gruvbox_dark.conf
+
+font_family Mononoki Nerd Font
+font_size 13
+adjust_line_height 125%
+cursor_blink_interval 0
+window_padding_width 5
+background_opacity 0.9
+hide_window_decorations no
+remember_window_size yes
+enable_audio_bell no
