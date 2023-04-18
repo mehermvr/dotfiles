@@ -43,7 +43,7 @@ ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # nvim setup
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
+# git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 
 yadm checkout .
 
