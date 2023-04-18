@@ -38,8 +38,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.cudarc ]; then
-    . ~/.cudarc
+if [ -f ~/.config/shell/.cudarc ]; then
+    . ~/.config/shell/.cudarc
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
