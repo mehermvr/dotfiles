@@ -3,6 +3,8 @@
 cd "$HOME"
 
 # we hate submodules around here, TODO: fix this ugliness
+rm -rf $ZSH_CUSTOM/plugins/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-syntax-highlighting $HOME/.config/kitty-themes $HOME/.config/nerd-fonts $HOME/.oh-my-zsh $HOME/.config/nvim
+
 # zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -35,5 +37,7 @@ $($(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/in
 
 # nvim setup
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
+
+yadm checkout .
 
 exec zsh
