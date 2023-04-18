@@ -7,7 +7,7 @@ currently hypr focused on arch and hyprland
 ## setup
 TBD
 ```bash
-sudo apt intall curl && sh -c "$(curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/tools/install.sh)"
+sudo apt install -y curl && sh -c "$(curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/tools/install.sh)"
 ```
 ## Details
 
