@@ -11,7 +11,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
 
 # nerd font setup
-git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts ~/.config/nerd-fonts
+# TODO: add a gaurd if font is already installed
+git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts
 cd ~/.config/nerd-fonts
 git sparse-checkout add patched-fonts/Mononoki
 ./install.sh Mononoki
@@ -26,10 +27,10 @@ ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fanc
 git clone https://github.com/jirutka/esh.git ~/.local/src/esh
 ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
 
-
 # powerline10k setup
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-exec zsh
 
 # nvim setup
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+
+exec zsh
