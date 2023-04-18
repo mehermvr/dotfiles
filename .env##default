@@ -1,0 +1,7 @@
+# User configuration
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.local/bin"
+export EDITOR="nvim"
+export BAT_THEME="gruvbox-dark"

@@ -24,15 +24,9 @@ plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sud
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-export EDITOR="nvim"
-PATH="$PATH:$HOME/.cargo/bin"
-PATH="$PATH:$HOME/.local/bin"
-export LOG_DIR="/export/data/meher/logs"
-export DATA_DIR="/export/data/meher/data"
-export BAT_THEME="gruvbox-dark"
+if [ -f ~/.env ]; then
+    . ~/.env
+fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
