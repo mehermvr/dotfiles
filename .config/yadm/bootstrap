@@ -13,6 +13,7 @@ export KEEP_ZSHRC=yes
 export RUNZSH=no
 ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
 sudo chsh -s "$(which zsh)" "$USER" 
+export SHELL=$(which zsh)
 
 # zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
