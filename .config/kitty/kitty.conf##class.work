@@ -1,4 +1,4 @@
-include ~/.config/kitty-themes/themes/gruvbox_dark.conf
+include ~/.config/kitty-themes/themes/main_theme.conf
 
 font_family Mononoki Nerd Font
 font_size 13
