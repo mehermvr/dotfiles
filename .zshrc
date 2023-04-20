@@ -36,5 +36,14 @@ if [ -f ~/.config/shell/.cudarc ]; then
     . ~/.config/shell/.cudarc
 fi
 
+function aliased_ssh()
+{
+  kitty +kitten themes --reload-in=parent Tokyo Night Moon;
+  ssh $@;
+  kitty +kitten themes --reload-in=parent Gruvbox Dark
+}
+compdef aliased_ssh=ssh
+alias ssh="aliased_ssh"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
