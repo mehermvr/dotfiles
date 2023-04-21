@@ -4,6 +4,9 @@ currently hypr focused on arch and hyprland
 
 ![current setup](current.png)
 
+TODO
+- setup the kitty manual install stuff. see kitty/setup.md
+
 ## setup
 TBD
 
