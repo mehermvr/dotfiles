@@ -1,5 +1,6 @@
 # For a full list of active aliases, run `alias`.
-alias pscp="rsync -azrvuh --progress"
+alias ocp="cp"
+alias cp="rsync -azrvuh --progress"
 alias gs="git status"
 alias gf="git fetch"
 alias gfs="git fetch && git status"
