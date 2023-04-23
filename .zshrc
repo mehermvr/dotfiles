@@ -17,27 +17,11 @@ plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sud
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -f ~/.env ]; then
-    . ~/.env
-fi
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.config/shell/.cudarc ]; then
-    . ~/.config/shell/.cudarc
-fi
-
-# run ssh agent, and store the result
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-# load up the stored ssh agent env vars. courtesy arch wiki
-if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
-
+if ! pgrep -u "$USER" ssh-agent > /
 # theme the tty to rose pine moon
 # #!/bin/sh
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
