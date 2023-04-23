@@ -5,3 +5,7 @@ PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 export EDITOR="nvim"
 export BAT_THEME="gruvbox-dark"
+
+if [ -f ~/.config/shell/.cudarc ]; then
+    . ~/.config/shell/.cudarc
+fi
