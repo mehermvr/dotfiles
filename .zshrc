@@ -1,3 +1,8 @@
+# ssh
+# can run ssh-agen but that asks for an x11 password prompt
+# alternative is keychain
+eval $(keychain --nogui --eval --quiet id_ed25519 )
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
