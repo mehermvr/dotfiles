@@ -7,3 +7,4 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.local/bin/kitty 50
 # this next one will be manual. on auto mode, it should be kitty anyways.
 sudo update-alternatives --config x-terminal-emulator
+sudo rm /etc/xdg/kitty/kitty.conf
