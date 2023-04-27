@@ -223,4 +223,4 @@ client.unfocused        $darkgray $darkgray $lightgray $purple $darkgray
 client.urgent           $red $red $white $red $red
 
 gaps inner 10
-gaps outer 5
+gaps outer 3
