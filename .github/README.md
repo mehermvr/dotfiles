@@ -1,5 +1,10 @@
 # corven's dotfiles
 
+fonts are still fucked
+picom is fucked
+rest is good?
+
+
 currently hypr focused on arch and hyprland
 
 ![current setup](current.png)
