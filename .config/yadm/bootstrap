@@ -84,7 +84,17 @@ install_i3(){
 	sudo apt install apt-transport-https --yes
 	echo "deb https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main" | sudo tee /etc/apt/sources.list.d/i3-autobuild.list
 	sudo apt update
-	sudo apt install i3
+	sudo apt install -y i3 feh rofi i3blocks maim
+}
+
+install_picom(){
+	clone_fail_silent https://github.com/yshui/picom.git §HOME/.local/src/picom
+	cd $HOME/.local/src/picom
+	install_package libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+	git submodule update --init --recursive
+	meson setup --buildtype=release . build
+	ninja -C build install
+	cd $HOME
 }
 
 cd "$HOME"
