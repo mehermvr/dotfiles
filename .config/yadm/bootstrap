@@ -38,7 +38,7 @@ install_build_utils() {
 
 
 install_essential_tools() {
-  install_pkgs bat btop tree htop ripgrep wget binutils less xdg-utils
+  install_pkgs vim neovim bat btop tree htop ripgrep wget binutils less xdg-utils
   pip3 install thefuck
 }
 
@@ -66,10 +66,12 @@ install_crap() {
 	# git diff-so-fancy setup
 	clone_fail_silent https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fancy
 	mkdir -p $HOME/.local/bin
+	rm $HOME/.local/bin/diff-so-fancy
 	ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
 
 	# setup esh
 	clone_fail_silent https://github.com/jirutka/esh.git ~/.local/src/esh
+	rm $HOME/.local/bin/esh
 	ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
 }
 
