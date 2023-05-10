@@ -38,7 +38,7 @@ install_build_utils() {
 
 
 install_essential_tools() {
-  install_pkgs vim neovim bat btop tree htop ripgrep wget binutils less xdg-utils
+  install_package vim neovim bat btop tree htop ripgrep wget binutils less xdg-utils
   pip3 install thefuck
 }
 
@@ -79,6 +79,14 @@ install_powerline_10k(){
 	clone_fail_silent --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 }
 
+install_i3(){
+	curl https://baltocdn.com/i3-window-manager/signing.asc | sudo apt-key add -
+	sudo apt install apt-transport-https --yes
+	echo "deb https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main" | sudo tee /etc/apt/sources.list.d/i3-autobuild.list
+	sudo apt update
+	sudo apt install i3
+}
+
 cd "$HOME"
 sudo apt update
 export SHELL=$(which zsh)
@@ -92,6 +100,7 @@ install_ssh
 install_fonts
 install_crap
 install_powerline_10k
+install_i3
 
 # powerline10k setup
 yadm checkout .
