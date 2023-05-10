@@ -54,11 +54,11 @@ install_kitty(){
 }
 
 install_ssh() {
-  install_pkgs openssh-client openssh-server sshfs
+  install_package openssh-client openssh-server sshfs
 }
 
 install_fonts() {
-  	install_pkgs fonts-powerline
+  	install_package fonts-powerline
   	clone_fail_silent --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts
 	cd ~/.config/nerd-fonts
 	git sparse-checkout add patched-fonts/Mononoki
