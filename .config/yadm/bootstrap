@@ -90,6 +90,7 @@ install_i3(){
 cd "$HOME"
 sudo apt update
 export SHELL=$(which zsh)
+yadm remote set-url origin "git@github.com:mehermvr/dotfiles.git"
 
 install_zsh
 install_python
