@@ -112,6 +112,7 @@ install_fonts
 install_crap
 install_powerline_10k
 install_i3
+install_picom
 
 # powerline10k setup
 yadm checkout .
