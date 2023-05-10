@@ -37,5 +37,7 @@ function aliased_ssh()
   ssh $@;
   kitty +kitten themes --reload-in=parent Gruvbox Dark
 }
-compdef aliased_ssh=ssh
-alias ssh="aliased_ssh"
+# compdef aliased_ssh=ssh
+# alias ssh="aliased_ssh"
+alias c="clear"
+alias htop="btop"

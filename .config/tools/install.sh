@@ -5,7 +5,7 @@ install_package()
         sudo apt install --no-install-recommends -y "$@"
 }
 
-install_package git neovim zsh bat kitty build-essential ripgrep curl zsh
+install_package git curl 
 
 # some initial setup
 LOCAL_SRC=$HOME/.local/src

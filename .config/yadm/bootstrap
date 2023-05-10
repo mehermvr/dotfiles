@@ -1,49 +1,96 @@
 #!/bin/sh
 
-cd "$HOME"
+# follows nachovizzos dotfiles setup: https://github.com/nachovizzo/dotfiles/blob/main/.config/yadm/bootstrap
 
-# we hate submodules around here, TODO: fix this ugliness
-rm -rf $ZSH_CUSTOM/plugins/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-syntax-highlighting $HOME/.config/kitty-themes $HOME/.config/nerd-fonts $HOME/.oh-my-zsh $HOME/.config/nvim ~/.local/src/diff-so-fancy ~/.local/src/esh
+install_package(){
+	sudo apt install --no-install-recommends -y "$@"
+}
 
+# fail silent
+clone_fail_silent(){
+	git clone "$@" 2> /dev/null || true
+}
 
 
 # Install ohmyzsh, thanks nacho
-export CHSH=no
-export KEEP_ZSHRC=yes
-export RUNZSH=no
-ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
-sudo chsh -s "$(which zsh)" "$USER" 
+install_zsh(){
+	install_package zsh
+	export CHSH=no
+	export KEEP_ZSHRC=yes
+	export RUNZSH=no
+	ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+	sudo chsh -s "$(which zsh)" "$USER" 2> /dev/null || chsh -s "$(which zsh)" 
+	# zsh plugins
+	clone_fail_silent --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	clone_fail_silent https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+}
+
+install_python() {
+  install_pkgs python3 python3-pip python3-dev python-is-python3
+  python3 -m pip install --user --upgrade pip
+  pip install ipython ipdb black
+}
+
+install_build_utils() {
+  install_package build-essential cmake cmake-curses-gui
+}
+
+
+install_essential_tools() {
+  install_pkgs bat btop tree htop ripgrep wget binutils less xdg-utils
+  pip3 install thefuck
+}
+
+install_kitty(){
+	install_package kitty
+	clone_fail_silent --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
+
+}
+
+install_ssh() {
+  install_pkgs openssh-client openssh-server sshfs
+}
+
+install_fonts() {
+  	install_pkgs fonts-powerline
+  	clone_fail_silent --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts
+	cd ~/.config/nerd-fonts
+	git sparse-checkout add patched-fonts/Mononoki
+	./install.sh Mononoki
+	cd "$HOME"
+	fc-cache -f -v
+}
+
+install_crap() {
+	# git diff-so-fancy setup
+	clone_fail_silent https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fancy
+	mkdir -p $HOME/.local/bin
+	ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
+
+	# setup esh
+	clone_fail_silent https://github.com/jirutka/esh.git ~/.local/src/esh
+	ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
+}
+
+install_powerline_10k(){
+	clone_fail_silent --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+}
+
+cd "$HOME"
+sudo apt update
 export SHELL=$(which zsh)
 
-# zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-# kitty themeing
-git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
-
-# nerd font setup
-# TODO: add a gaurd if font is already installed
-git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts
-cd ~/.config/nerd-fonts
-git sparse-checkout add patched-fonts/Mononoki
-./install.sh Mononoki
-cd "$HOME"
-
-# git diff-so-fancy setup
-git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fancy
-mkdir -p $HOME/.local/bin
-ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
-
-# setup esh
-git clone https://github.com/jirutka/esh.git ~/.local/src/esh
-ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
+install_zsh
+install_python
+install_build_utils
+install_essential_tools
+install_kitty
+install_ssh
+install_fonts
+install_crap
+install_powerline_10k
 
 # powerline10k setup
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-# nvim setup
-# git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
-
 yadm checkout .
 
