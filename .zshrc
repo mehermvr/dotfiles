@@ -21,11 +21,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# ssh
-# can run ssh-agen but that asks for an x11 password prompt
-# alternative is keychain
-eval $(keychain --nogui --noask --eval --quiet id_ed25519 )
-
 # theme the tty to rose pine moon
 # #!/bin/sh
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
