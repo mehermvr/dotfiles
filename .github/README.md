@@ -4,7 +4,6 @@ fonts are still fucked
 picom is fucked
 rest is good?
 
-
 currently hypr focused on arch and hyprland
 
 ![current setup](current.png)
@@ -19,6 +18,13 @@ needs curl
 
 ```bash
 sudo apt install -y curl && sh -c "$(curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/tools/install.sh)"
+```
+
+systemd user unit
+
+```bash
+systemctl --user enable ssh-agent.service
+systemctl --user start ssh-agent.service
 ```
 
 ## Details

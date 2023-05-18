@@ -57,6 +57,8 @@ lazy.setup({
 	{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'},
 	{'lewis6991/gitsigns.nvim'},
 	{ 'tpope/vim-repeat' },
+	{ 'neovim/nvim-lspconfig' },
+
 })
 
 vim.opt.termguicolors = true
