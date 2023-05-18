@@ -58,7 +58,8 @@ lazy.setup({
 	{'lewis6991/gitsigns.nvim'},
 	{ 'tpope/vim-repeat' },
 	{ 'neovim/nvim-lspconfig' },
-
+	-- temporary fix until we figure out lsp semantic tokens
+	{ 'm-demare/hlargs.nvim' },
 })
 
 vim.opt.termguicolors = true
@@ -161,3 +162,5 @@ vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 
 require('telescope').load_extension('fzf')
 require('gitsigns').setup()
+-- temporary until LSP semantic tokens
+require('hlargs').setup()
