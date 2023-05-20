@@ -230,3 +230,6 @@ bindsym $mod+Shift+P exec --no-startup-id maim --select "/home/$USER/Pictures/$(
 
 ## Clipboard Screenshots
 bindsym $mod+Ctrl+P exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
+bindsym $mod+Ctrl+l exec "/home/$USER/.config/scripts/i3_lock.sh"
+exec xautolock -time 5 -lock "/home/$USER/.config/scripts/i3_lock.sh" &

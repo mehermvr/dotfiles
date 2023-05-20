@@ -78,6 +78,7 @@ install_crap() {
 	clone_fail_silent https://github.com/jirutka/esh.git ~/.local/src/esh
 	rm $HOME/.local/bin/esh
 	ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
+	install_package imagemagick
 }
 
 install_powerline_10k(){
