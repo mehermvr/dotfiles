@@ -7,6 +7,10 @@ vim.opt.breakindent = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
+-- check this shit and yanky, it works but its patches
+vim.opt.clipboard = 'unnamedplus'
+
+
 
 -- vim.keymap.set({'n', 'x'}, 'cp', '"+y')
 -- vim.keymap.set({'n', 'x'}, 'cv', '"+p')
@@ -17,6 +21,8 @@ vim.g.mapleader = ' '
 -- setup lazy.nvim
 --
 local lazy = {}
+
+
 
 function lazy.install(path)
 	if not vim.loop.fs_stat(path) then
@@ -60,6 +66,7 @@ lazy.setup({
 	{ 'neovim/nvim-lspconfig' },
 	-- temporary fix until we figure out lsp semantic tokens
 	{ 'm-demare/hlargs.nvim' },
+	{ 'gbprod/yanky.nvim', dependencies = 'kkharji/sqlite.lua' },
 })
 
 vim.opt.termguicolors = true
@@ -161,6 +168,14 @@ require('nvim-tree').setup({
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('yank_history')
 require('gitsigns').setup()
 -- temporary until LSP semantic tokens
 require('hlargs').setup()
+require('yanky').setup()
+vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
+vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
