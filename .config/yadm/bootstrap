@@ -103,6 +103,16 @@ install_picom(){
 	cd $HOME
 }
 
+install_neovim(){
+	clone_fail_silent https://github.com/neovim/neovim.git $HOME/.local/src/neovim
+	cd $HOME/.local/src/neovim
+	instal_package ninja-build gettext cmake unzip curl
+	git checkout stable
+	make CMAKE_BUILD_TYPE=RelWithDebInfo
+	sudo make install 
+}
+
+
 cd "$HOME"
 sudo apt update
 export SHELL=$(which zsh)
@@ -119,6 +129,7 @@ install_crap
 install_powerline_10k
 install_i3
 install_picom
+install_neovim
 
 # powerline10k setup
 yadm checkout .
