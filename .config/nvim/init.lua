@@ -67,6 +67,9 @@ lazy.setup({
 	-- temporary fix until we figure out lsp semantic tokens
 	{ 'm-demare/hlargs.nvim' },
 	{ 'gbprod/yanky.nvim', dependencies = 'kkharji/sqlite.lua' },
+	{ 'Fymyte/rasi.vim' },
+	{ 'ap/vim-css-color' },
+
 })
 
 vim.opt.termguicolors = true
