@@ -1,0 +1,35 @@
+* {
+	/* Gruvbox dark colors */
+    gruvbox-dark-bg0-soft:     	#32302f;
+    gruvbox-dark-bg1:          	#3c3836;
+    gruvbox-dark-bg3:          	#665c54;
+    gruvbox-dark-fg0:          	#fbf1c7;
+    gruvbox-dark-fg1:          	#ebdbb2;
+    gruvbox-dark-red-dark:     	#cc241d;
+    gruvbox-dark-red-light:    	#fb4934;
+	gruvbox-dark-green-dark:	#98971a;
+    gruvbox-dark-green-light:	#b8bb26;
+    gruvbox-dark-yellow-dark:  	#d79921;
+    gruvbox-dark-yellow-light: 	#fabd2f;
+    gruvbox-dark-blue-dark:		#458588;
+    gruvbox-dark-blue-light:	#83a598;
+    gruvbox-dark-purple-dark:	#b16286;
+    gruvbox-dark-purple-light:	#d3869b;
+    gruvbox-dark-aqua-dark:		#689d6a;
+    gruvbox-dark-aqua-light:	#8ec07c;
+    gruvbox-dark-gray:        	#a89984;
+
+    background0-color: @gruvbox-dark-bg0-soft;
+    background1-color: @gruvbox-dark-bg1;
+    foreground0-color: @gruvbox-dark-fg0;
+    foreground1-color: @gruvbox-dark-fg1;
+    border-color: @gruvbox-dark-gray;
+    green: @gruvbox-dark-green-dark;
+    yellow: @gruvbox-dark-yellow-dark;
+    blue: @gruvbox-dark-blue-dark;
+	blue-alt:  @gruvbox-dark-blue-light;
+    purple: @gruvbox-dark-purple-dark;
+    aqua: @gruvbox-dark-aqua-dark;
+    gray: @gruvbox-dark-gray;
+    width: 600;
+}
