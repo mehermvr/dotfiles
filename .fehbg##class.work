@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/feh --no-fehbg --bg-fill '/home/meher/Pictures/Wallpapers/2mons_left.png' '/home/meher/Pictures/Wallpapers/2mons_right.png' 
