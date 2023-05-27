@@ -6,6 +6,20 @@ install_package(){
 	sudo apt install --no-install-recommends -y "$@"
 }
 
+
+git_clone_or_pull() {
+    local repo_url="$1"
+    local dest_path="$2"
+    local git_options="${@:3}"
+
+    if [ -d "$dest_path" ]; then
+        echo "Directory already exists: $dest_path"
+        cd "$dest_path" && git pull
+    else
+        git clone $git_options "$repo_url" "$dest_path"
+    fi
+}
+
 # fail silent
 clone_fail_silent(){
 	git clone "$@" 2> /dev/null || true
