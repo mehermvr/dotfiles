@@ -9,6 +9,6 @@ adjust_line_height 125%
 cursor_blink_interval 0
 window_padding_width 5
 background_opacity 0.6 
-
+allow_hyperlinks yes
 
 

@@ -1,8 +1,7 @@
 #!/bin/sh
 #
 #  https://github.com/sachnr/hyprlandcfg/blob/main/scripts/rofi-power
-dir="$HOME/.config/hypr/rofi/power.rasi"
-dir1="$HOME/.config/hypr/rofi/confirm.rasi"
+dir="$HOME/.config/rofi/power.rasi"
 uptime="$(uptime -p | sed -e 's/up //g')"
 host=$HOST
 

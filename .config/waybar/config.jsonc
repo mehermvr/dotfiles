@@ -95,7 +95,7 @@
 
   "custom/power": {
     "format": " ⏻ ",
-    "on-click": "~/.config/hypr/scripts/rofi-power"
+    "on-click": "~/.config/hypr/scripts/rofi-power.sh"
   },
 
   "mpd": {

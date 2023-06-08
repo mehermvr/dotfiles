@@ -37,10 +37,9 @@ function aliased_ssh()
   ssh $@;
   kitty +kitten themes --reload-in=parent Gruvbox Dark
 }
-
+compdef aliased_ssh=ssh
 function update_submodules() {git submodule foreach "git fetch --all && git checkout $1 && git pull"}
 
-# compdef aliased_ssh=ssh
-# alias ssh="aliased_ssh"
 alias c="clear"
 alias htop="btop"
+alias reload_theme="kitty +kitten themes --reload-in=parent Gruvbox Dark"
