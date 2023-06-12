@@ -21,6 +21,12 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f $HOME/.config/shell/.condarc ]; then
+    . $HOME/.config/shell/.condarc
+fi
+
+
+
 # theme the tty to rose pine moon
 # #!/bin/sh
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
@@ -29,3 +35,5 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
