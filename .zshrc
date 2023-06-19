@@ -13,19 +13,21 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile)
+plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile conda-zsh-completion)
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f $HOME/.config/shell/.bash_aliases ]; then
+    . $HOME/.config/shell/.bash_aliases
 fi
 
 if [ -f $HOME/.config/shell/.condarc ]; then
     . $HOME/.config/shell/.condarc
 fi
 
-
+if [ -f $HOME/.config/shell/.cudarc ]; then
+    . $HOME/.config/shell/.cudarc
+fi
 
 # theme the tty to rose pine moon
 # #!/bin/sh
