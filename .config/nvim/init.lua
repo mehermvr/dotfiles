@@ -10,19 +10,14 @@ vim.opt.expandtab = false
 -- check this shit and yanky, it works but its patches
 vim.opt.clipboard = 'unnamedplus'
 
-
-
 -- vim.keymap.set({'n', 'x'}, 'cp', '"+y')
 -- vim.keymap.set({'n', 'x'}, 'cv', '"+p')
 
 vim.g.mapleader = ' '
-
 -- 
 -- setup lazy.nvim
 --
 local lazy = {}
-
-
 
 function lazy.install(path)
 	if not vim.loop.fs_stat(path) then
@@ -69,6 +64,10 @@ lazy.setup({
 	{ 'gbprod/yanky.nvim', dependencies = 'kkharji/sqlite.lua' },
 	{ 'Fymyte/rasi.vim' },
 	{ 'ap/vim-css-color' },
+	{
+		'tadachs/ros-nvim',
+		dependencies = { "nvim-lua/plenary.nvim" },
+    },
 
 })
 
@@ -176,6 +175,23 @@ require('gitsigns').setup()
 -- temporary until LSP semantic tokens
 require('hlargs').setup()
 require('yanky').setup()
+
+require("ros-nvim").setup({
+	lazy_load_package_list = true,
+	telescope = {
+		ws_filter = "current",
+	},
+	treesitter = {
+		enabled = true,
+	},
+	commands = {
+		enabled = false,
+	},
+	autocmds = {
+		enabled = false,
+	},
+}) 
+
 vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
 vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
 vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
