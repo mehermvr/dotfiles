@@ -21,6 +21,10 @@ if [ -f $HOME/.config/shell/.bash_aliases ]; then
     . $HOME/.config/shell/.bash_aliases
 fi
 
+if [ -f $HOME/.config/shell/zsh_functions.sh ]; then
+    . $HOME/.config/shell/zsh_functions.sh
+fi
+
 if [ -f $HOME/.config/shell/.condarc ]; then
     . $HOME/.config/shell/.condarc
 fi
@@ -28,6 +32,11 @@ fi
 if [ -f $HOME/.config/shell/.cudarc ]; then
     . $HOME/.config/shell/.cudarc
 fi
+
+if [ -f $HOME/.config/shell/ros.rc ]; then
+    . $HOME/.config/shell/ros.rc
+fi
+
 
 # theme the tty to rose pine moon
 # #!/bin/sh

@@ -49,13 +49,13 @@ separator = |
 separator-foreground = ${colors.disabled}
 enable-ipc = true
 
-[bar/main]
+[bar/status]
 inherit = section/base
-modules-left = i3 xwindow
+modules-left = i3 
 modules-right = filesystem pulseaudio xkeyboard memory cpu battery wlan eth date backlight
 tray-position = right
 
-[bar/secondary]
+[bar/normal]
 inherit = section/base
 modules-left = i3 xwindow
 
