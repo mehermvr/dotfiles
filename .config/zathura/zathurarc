@@ -1,0 +1,58 @@
+# vim:ft=conf
+# copying mostly nacho's for now
+## Color Scheme
+set default-bg                  "#1d2021" # bg
+set default-fg                  "#1f1f24" # fg
+set render-loading              true
+set render-loading-bg           "#1d2021" # bg
+set render-loading-fg           "#1f1f24" # fgcopy to clipboard
+set selection-clipboard clipboard
+
+# Recolor book content's color
+set recolor-lightcolor          "#1f1f24" # bg
+set recolor-darkcolor           "#ffffff" # fg
+set recolor                     "false"
+set recolor-keephue             "false"
+set recolor-reverse-video       "false"
+
+# odd pages on first column in side-by-side
+set first-page-column "1:1"
+set window-title-basename "true"
+set render-loading true
+set adjust-open "best-fit"
+set page-padding "2"
+set guioptions "s"
+set pages-per-row "1"
+
+# Add a shortcut to display x pages per row
+map [normal] p1 set "pages-per-row 1"
+map [normal] p2 set "pages-per-row 2"
+map [normal] p3 set "pages-per-row 3"
+map [normal] p4 set "pages-per-row 4"
+map [normal] p5 set "pages-per-row 5"
+map [normal] p6 set "pages-per-row 6"
+map [normal] p7 set "pages-per-row 7"
+map [normal] p8 set "pages-per-row 8"
+map [normal] p9 set "pages-per-row 9"
+map [normal] pp set "pages-per-row 20"
+map [fullscreen] p1 set "pages-per-row 1"
+map [fullscreen] p2 set "pages-per-row 2"
+map [fullscreen] p3 set "pages-per-row 3"
+map [fullscreen] p4 set "pages-per-row 4"
+map [fullscreen] p5 set "pages-per-row 5"
+map [fullscreen] p6 set "pages-per-row 6"
+map [fullscreen] p7 set "pages-per-row 7"
+map [fullscreen] p8 set "pages-per-row 8"
+map [fullscreen] p8 set "pages-per-row 9"
+
+# Allow to set white background for reading
+map [normal] w set "default-bg \"#FFFFFF\""
+map [normal] b set "default-bg \"#1f1f24\""
+map [fullscreen] w set "default-bg \"#FFFFFF\""
+map [fullscreen] b set "default-bg \"#1f1f24\""
+
+# Make presenters work
+map [normal]     <Right> navigate next
+map [normal]     <Left>  navigate previous
+map [fullscreen] <Right> navigate next
+map [fullscreen] <Left>  navigate previous
