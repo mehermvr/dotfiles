@@ -9,6 +9,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 -- check this shit and yanky, it works but its patches
 vim.opt.clipboard = 'unnamedplus'
+-- vim.wo.relativenumber = true
 
 -- vim.keymap.set({'n', 'x'}, 'cp', '"+y')
 -- vim.keymap.set({'n', 'x'}, 'cv', '"+p')
@@ -64,6 +65,7 @@ lazy.setup({
 	{ 'gbprod/yanky.nvim', dependencies = 'kkharji/sqlite.lua' },
 	{ 'Fymyte/rasi.vim' },
 	{ 'ap/vim-css-color' },
+	{ 'sitiom/nvim-numbertoggle' },
 	{
 		'tadachs/ros-nvim',
 		dependencies = { "nvim-lua/plenary.nvim" },

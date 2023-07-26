@@ -13,12 +13,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile conda-zsh-completion)
+plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile conda-zsh-completion zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -f $HOME/.config/shell/.bash_aliases ]; then
-    . $HOME/.config/shell/.bash_aliases
+if [ -f $HOME/.config/shell/aliases.sh ]; then
+    . $HOME/.config/shell/aliases.sh
 fi
 
 if [ -f $HOME/.config/shell/zsh_functions.sh ]; then
@@ -43,6 +43,29 @@ fi
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
   setcolors $HOME/.config/linux-vt-setcolors/example-colors/terminal.sexy/xcolors.net/mikado
 fi
+alias ckb='cmake -Bbuild . && cmake --build build -j$(nproc)'
+
+# Autoselect Vi mode indicator
+# PROMPT_VI_MODE_BOX='%B%S%F{green}[I]'
+# function zvm_after_select_vi_mode() {
+#   case $ZVM_MODE in
+#     $ZVM_MODE_NORMAL)
+#         PROMPT_VI_MODE_BOX='%B%S%F{red}[N]'
+#     ;;
+#     $ZVM_MODE_INSERT)
+#         PROMPT_VI_MODE_BOX='%B%S%F{green}[I]'
+#     ;;
+#     $ZVM_MODE_VISUAL)
+#         PROMPT_VI_MODE_BOX='%B%S%F{yellow}[V]'
+#     ;;
+#     $ZVM_MODE_VISUAL_LINE)
+#         PROMPT_VI_MODE_BOX='%B%S%F{yellow}[V]'
+#     ;;
+#     $ZVM_MODE_REPLACE)
+#         PROMPT_VI_MODE_BOX='%B%S%F{blue}[R]'
+#     ;;
+#   esac
+# }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
