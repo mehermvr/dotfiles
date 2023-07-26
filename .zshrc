@@ -43,7 +43,6 @@ fi
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
   setcolors $HOME/.config/linux-vt-setcolors/example-colors/terminal.sexy/xcolors.net/mikado
 fi
-alias ckb='cmake -Bbuild . && cmake --build build -j$(nproc)'
 
 # Autoselect Vi mode indicator
 # PROMPT_VI_MODE_BOX='%B%S%F{green}[I]'
