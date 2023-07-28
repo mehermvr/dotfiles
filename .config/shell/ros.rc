@@ -1,0 +1,8 @@
+# vim:ft=bash
+function env_ros() {
+	export ROS_DOMAIN_ID=0
+	source /usr/share/colcon_cd/function/colcon_cd.sh
+	source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+	export _colcon_cd_root=/opt/ros/iron/
+	source $HOME/work/robots/ros2_ws/install/setup.zsh
+}
