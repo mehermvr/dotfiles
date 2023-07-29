@@ -1,0 +1,5 @@
+audio needs sof-firmware
+NetworkManager
+pipewire
+brightnessctl
+lxappearance
