@@ -3,3 +3,7 @@ NetworkManager
 pipewire
 brightnessctl
 lxappearance
+
+battery management: https://github.com/teleshoes/tpacpi-bat
+needs acpi_call, simple install
+copy the service and conf file as instructed. systemd enable and start
