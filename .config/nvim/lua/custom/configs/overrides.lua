@@ -45,6 +45,8 @@ M.treesitter = {
   },
 }
 
+-- mason to install the binaries, null-ls for actually using 'formatters', lspconfig for usings lsp diags, use checkhealth to see which null-ls stuff doesnt work
+-- https://mason-registry.dev/registry/list
 M.mason = {
   ensure_installed = {
     "lua-language-server",
@@ -55,7 +57,9 @@ M.mason = {
     "clang-format",
     "pyright",
     "black",
-    "docformatter"
+    "docformatter",
+    "latexindent",
+    "texlab",
   },
 }
 

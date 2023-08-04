@@ -5,6 +5,12 @@ M.ui = {
   theme = "catppuccin",
   theme_toggle = { "catppuccin", "everforest" },
   transparency = true,
+  tabufline = {
+    show_numbers = true,
+    enabled = true,
+    lazyload = true,
+    overriden_modules = nil,
+  },
   statusline = {
     theme = "default", -- default/vscode/vscode_colored/minimal
     separator_style = "block",
