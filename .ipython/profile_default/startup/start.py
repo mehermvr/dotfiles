@@ -1,4 +1,5 @@
 import numpy as np
+
 try:
     import torch
 except ModuleNotFoundError:
@@ -10,5 +11,10 @@ except ModuleNotFoundError:
     pass
 import os
 import pathlib
-import pandas as pd
+
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    pass
+
 from pathlib import Path
