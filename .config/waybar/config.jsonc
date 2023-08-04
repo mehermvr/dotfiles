@@ -1,130 +1,122 @@
+
 {
-  // https://github.com/sachnr/hyprlandcfg/blob/main/waybar/config.jsonc
-  // see also the css there.
-  "layer": "top",
-  "position": "top", 
-  "height": 32,
-  
-  "modules-left":   ["wlr/workspaces", "wlr/taskbar"],
-  "modules-center": ["mpd"],
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 30,
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["temperature","custom/power_profile","battery","backlight","pulseaudio","pulseaudio#microphone","tray", "network"],
+    "hyprland/window": {
+        "format": "{}",
+		"max-length": 50,
+    },
 
-  "modules-right":  ["tray", "pulseaudio", "network", "clock#date", "clock#time", "custom/power"],
-  // "modules-right":  ["tray", "pulseaudio", "network", "clock#date", "clock#time", "custom/power"],
+    //"custom/power_profile":{
+        //shows the current power profile and switches to next on click
+    //    "exec": "asusctl profile -p | sed s:'Active profile is'::",
+    //    "interval": 30,
+    //    "format": "󰈐{}", 
+    //    "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
+    //    "signal": 8
+    //},
 
-  "wlr/taskbar": {
-	"format": "{icon} {app_id}",
-	"icon-size": 14,
-	"icon-theme": "Papirus",
-	"tooltip-format": "{title}",
-	"on-click": "activate",
-	"on-click-middle": "close",
-  "on-click-right": "minimize-raise",
-	"ignore-list": [
-	    "kitty"
-	],
-	"app_ids-mapping": {
-	}
-  },
+    //"custom/weather" : {
+        //shows the current weather and forecast
+        // "tooltip" : true,
+        //"format" : "{}",
+        //"interval" : 30,
+        //"exec" : "~/.config/waybar/scripts/waybar-wttr.py",
+        //"return-type" : "json"
+    //},
 
-  "wlr/workspaces": {
-    // "disable-scroll": true,
-    "sort-by-number": true,
-    "all-outputs": true,
-    "on-click": "activate",
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
-    "format": "{icon}",
-    "format-icons": {
-      "1": "<span color=\"#EBDBB2\"></span>",
-      "2": "<span color=\"#EBDBB2\"></span>",
-      "3": "<span color=\"#EBDBB2\"></span>",
-      "4": "<span color=\"#EBDBB2\"></span>",
-      "5": "<span color=\"#EBDBB2\"></span>",
-      "6": "<span color=\"#EBDBB2\"></span>",
-      "7": "<span color=\"#EBDBB2\"></span>",
-      "8": "<span color=\"#EBDBB2\"></span>",
-      "9": "<span color=\"#EBDBB2\"></span>",
-      "urgent": "",
-      "focused": "",
-      "default": ""
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{: %I:%M %p   %a, %b %e}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
+        "min-length": 6
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "Mic: {volume}%",
+        "format-source-muted": "Mic: Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    
+    //"temperature": {
+        //"thermal-zone": 1,
+        //"format": "{temperatureF}°F ",
+        //"critical-threshold": 80,
+        //"format-critical": "{temperatureC}°C "
+    //},
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected \udb81\uddaa",
+        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
+    },
+
+    "bluetooth": {
+	    "format": " {status}",
+	    "format-disabled": "", // an empty format will hide the module
+	    "format-connected": " {num_connections}",
+	    "tooltip-format": "{device_alias}",
+	    "tooltip-format-connected": " {device_enumerate}",
+	    "tooltip-format-enumerate-connected": "{device_alias}"
     }
-  },
-
-  "tray": {
-    "icon-size": 14,
-    "spacing": 10
-  },
-
-  "clock#time": {
-    "interval": 1,
-    "format": "    {:%H:%M:%S} ",
-    "tooltip": false
-  },
-
-  "clock#date": {
-    "interval": 10,
-    "format": "    {:%e %b %y} ", // icon: calendar-alt
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-  },
-
-  "network": {
-    "format-wifi": " 直 {essid} ",
-    "format-ethernet": "   {essid} ",
-    "format-linked": "{ifname} (no ip)  ",
-    "format-disconnected": " 睊 disconnected ",
-    "tooltip-format-wifi": "signal strenght: {signalstrength}% | down speed: {bandwidthdownbits}, up speed: {bandwidthupbits}"
-  },
-
-  "pulseaudio": {
-    "format": "{icon} {volume}% ",
-    "format-muted": "   muted ",
-    "scroll-step": 5,
-    "on-click": "pactl set-sink-mute 0 toggle",
-    "on-click-middle": "pavucontrol",
-    "on-click-right": "~/.config/hypr/scripts/pactl_toggle.sh",
-    "format-icons": {
-      "headphone": "   ",
-      "hands-free": "   ",
-      "headset": "   ",
-      "phone": "   ",
-      "portable": "   ",
-      "car": "    ",
-      "default": ["   ", "   ", " 墳 ", "   "]
-    }
-  },
-
-  "custom/power": {
-    "format": " ⏻ ",
-    "on-click": "~/.config/hypr/scripts/rofi-power.sh"
-  },
-
-  "mpd": {
-    "format": " {stateIcon}   {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})    ",
-    "format-disconnected": " Disconnected  ",
-    "format-stopped": " Stopped  ",
-    "interval": 2,
-    "consume-icons": {
-      "on": " " // Icon shows only when "consume" is on
-    },
-    "random-icons": {
-      "off": "<span color=\"#fb4934\"> </span>", // Icon grayed out when "random" is off
-      "on": " "
-    },
-    "repeat-icons": {
-      "on": " "
-    },
-    "single-icons": {
-      "on": "1 "
-    },
-    "state-icons": {
-      "paused": "",
-      "playing": ""
-    },
-    "on-click": "playerctl play-pause",
-    "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous",
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
-  }
 }
-

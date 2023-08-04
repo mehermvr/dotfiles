@@ -1,16 +1,18 @@
 sort=-priority
 
-font=Roboto 12
+font=Mononoki Nerd Font 14
 
 on-button-left=invoke-default-action
 on-button-right=dismiss-all
 on-button-middle=dismiss
 
-background-color=#32302f
-text-color=#ebdbb2
-border-color=#1d2021
-progress-color=over #B8BB2680
-border-radius=8
+# Colors
+background-color=#eff1f5
+text-color=#4c4f69
+border-color=#1e66f5
+progress-color=over #ccd0da
+
+border-radius=4
 border-size=2
 anchor=top-right
 width=450
@@ -24,3 +26,7 @@ group-by=category
 
 [mode=do-not-disturb]
 invisible=1
+
+[urgency=high]
+border-color=#fe640b
+

@@ -7,3 +7,8 @@ lxappearance
 battery management: https://github.com/teleshoes/tpacpi-bat
 needs acpi_call, simple install
 copy the service and conf file as instructed. systemd enable and start
+
+installed https://github.com/AdnanHodzic/auto-cpufreq, and not from AUR, since its unmaintained. units installed.
+also thermald, enabled
+
+util-linux package, start and enable fstrim.timer

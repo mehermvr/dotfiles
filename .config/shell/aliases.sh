@@ -45,5 +45,6 @@ alias ssh_kitty='kitty +kitten ssh'
 alias c="clear"
 alias reload_theme="kitty +kitten themes --reload-in=parent Gruvbox Dark"
 alias ckb='cmake -Bbuild . && cmake --build build -j$(nproc)'
-
+alias set_us="setxkbmap -layout us"
+alias set_de="setxkbmap -layout de"
 

@@ -13,7 +13,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile conda-zsh-completion zsh-vi-mode)
+plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting z sudo history copybuffer copypath copyfile conda-zsh-completion)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -37,6 +37,9 @@ if [ -f $HOME/.config/shell/ros.rc ]; then
     . $HOME/.config/shell/ros.rc
 fi
 
+if [ -f $HOME/.config/shell/virtualenv.sh ]; then
+    . $HOME/.config/shell/virtualenv.sh
+fi
 
 # theme the tty to rose pine moon
 # #!/bin/sh
@@ -44,30 +47,9 @@ if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
   setcolors $HOME/.config/linux-vt-setcolors/example-colors/terminal.sexy/xcolors.net/mikado
 fi
 
-# Autoselect Vi mode indicator
-# PROMPT_VI_MODE_BOX='%B%S%F{green}[I]'
-# function zvm_after_select_vi_mode() {
-#   case $ZVM_MODE in
-#     $ZVM_MODE_NORMAL)
-#         PROMPT_VI_MODE_BOX='%B%S%F{red}[N]'
-#     ;;
-#     $ZVM_MODE_INSERT)
-#         PROMPT_VI_MODE_BOX='%B%S%F{green}[I]'
-#     ;;
-#     $ZVM_MODE_VISUAL)
-#         PROMPT_VI_MODE_BOX='%B%S%F{yellow}[V]'
-#     ;;
-#     $ZVM_MODE_VISUAL_LINE)
-#         PROMPT_VI_MODE_BOX='%B%S%F{yellow}[V]'
-#     ;;
-#     $ZVM_MODE_REPLACE)
-#         PROMPT_VI_MODE_BOX='%B%S%F{blue}[R]'
-#     ;;
-#   esac
-# }
+# ssh-agent and ssh-add automatize, needs keychain
+eval $(keychain --eval --quiet --nogui --noask id_ed25519 id_rsa id_ed25519)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias set_us="setxkbmap -layout us"
-alias set_de="setxkbmap -layout de"
