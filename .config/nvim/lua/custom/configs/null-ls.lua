@@ -24,6 +24,14 @@ local sources = {
   formatting.latexindent,
   -- python
   formatting.black,
+  -- misc
+  formatting.prettierd.with {
+    filetypes = { "html", "markdown", "css", "json", "jsonc", "yaml" },
+    extra_filetypes = { "toml" },
+    env = {
+      PRETTIERD_DEFAULT_CONFIG = vim.fn.expand "~/.config/nvim/lua/custom/configs/utils/.prettierrc.json",
+    },
+  },
 }
 
 null_ls.setup {

@@ -59,6 +59,8 @@ M.mason = {
     "black",
     "docformatter",
     "latexindent",
+    "json-lsp",
+    "prettierd",
     "texlab",
   },
 }
