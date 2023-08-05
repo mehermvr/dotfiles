@@ -35,6 +35,20 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
   },
+  {
+    "gbprod/yanky.nvim",
+    dependencies = "kkharji/sqlite.lua",
+    opts = {
+      ring = { storage = "sqlite" },
+    },
+    -- TODO: lazy load this. pita
+    lazy = false,
+    priority = 100,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
+  },
 }
 
 return plugins
