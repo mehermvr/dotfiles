@@ -47,10 +47,10 @@ M.yanky = {
     ["<C-p>"] = { "<Plug>(YankyCycleBackward)", "Cycle backward in yank-ring" },
   },
   x = {
-    ["p"] = { "<Plug>(YankyPutAfter)" },
-    ["P"] = { "<Plug>(YankyPutBefore)" },
-    ["gp"] = { "<Plug>(YankyGPutAfter)" },
-    ["gP"] = { "<Plug>(YankyGPutBefore)" },
+    ["p"] = { "<Plug>(YankyPutAfter)", "put after" },
+    ["P"] = { "<Plug>(YankyPutBefore)", "put before" },
+    ["gp"] = { "<Plug>(YankyGPutAfter)", "put after and move cursor" },
+    ["gP"] = { "<Plug>(YankyGPutBefore)", "put before and move cursor" },
   },
 }
 
