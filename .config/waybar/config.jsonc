@@ -1,14 +1,17 @@
 {
   "layer": "top",
   "position": "top",
-  "mode": "dock",
+  // "mode": "dock", // tooltips get hidden below windows for some reason
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "height": 30,
+  // "height": 30,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
+  "modules-center": [""],
   "modules-right": [
+    "clock",
+    "clock#date",
+    "cpu",
     "temperature",
     "custom/power_profile",
     "battery",
@@ -18,28 +21,35 @@
     "tray",
     "network"
   ],
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "brightnessctl set 1%+",
+    "on-scroll-down": "brightnessctl set 1%-"
+  },
+
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 20
+    },
+    "interval": 10,
+    "format": "{icon} {capacity}% {power}W {time}",
+    "format-alt": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-time": "{H}h{M}m",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip": true,
+    "tooltip-format": "Bat. {capacity}%, Rem. {time}"
+  },
   "hyprland/window": {
     "format": "{}",
     "max-length": 50
   },
-
-  //"custom/power_profile":{
-  //shows the current power profile and switches to next on click
-  //    "exec": "asusctl profile -p | sed s:'Active profile is'::",
-  //    "interval": 30,
-  //    "format": "󰈐{}",
-  //    "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
-  //    "signal": 8
-  //},
-
-  //"custom/weather" : {
-  //shows the current weather and forecast
-  // "tooltip" : true,
-  //"format" : "{}",
-  //"interval" : 30,
-  //"exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-  //"return-type" : "json"
-  //},
 
   "tray": {
     "icon-size": 15,
@@ -47,32 +57,35 @@
   },
 
   "clock": {
-    "format": "{: %I:%M %p   %a, %b %e}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "format": "{: %I:%M %p}",
+    "tooltip-format": "Nothing to see here broski"
   },
-
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon} {percent}%",
-    "format-icons": ["󰃞", "󰃟", "󰃠"],
-    "on-scroll-up": "brightnessctl set 1%+",
-    "on-scroll-down": "brightnessctl set 1%-",
-    "min-length": 6
-  },
-
-  "battery": {
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 20
+  "clock#date": {
+    "format": "{:%a, %d %b}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-alt": "{time} {icon}",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "actions": {
+      "on-click": "mode"
+    }
   },
-
+  "cpu": {
+    "interval": 5,
+    "format": "{icon}{usage:>2}%", //<U+F2DB>
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+  },
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "tooltip": false,
@@ -117,14 +130,5 @@
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected \udb81\uddaa",
     "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
-  },
-
-  "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "", // an empty format will hide the module
-    "format-connected": " {num_connections}",
-    "tooltip-format": "{device_alias}",
-    "tooltip-format-connected": " {device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}"
   }
 }

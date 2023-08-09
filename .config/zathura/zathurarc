@@ -56,3 +56,6 @@ map [normal]     <Right> navigate next
 map [normal]     <Left>  navigate previous
 map [fullscreen] <Right> navigate next
 map [fullscreen] <Left>  navigate previous
+
+# tex
+set synctex true

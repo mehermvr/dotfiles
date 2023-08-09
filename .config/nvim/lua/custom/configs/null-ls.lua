@@ -18,13 +18,14 @@ local sources = {
   formatting.clang_format,
   diagnostics.cmake_lint,
   -- make
-  diagnostics.checkmake,
+  -- diagnostics.checkmake,
   -- latex
   -- diagnostics.chktex,
   formatting.latexindent,
   -- python
   formatting.black,
   -- misc
+  -- formatting.deno_fmt,
   formatting.prettierd.with {
     filetypes = { "html", "markdown", "css", "json", "jsonc", "yaml" },
     extra_filetypes = { "toml" },
