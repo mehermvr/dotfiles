@@ -27,7 +27,8 @@
     "format": "{icon} {percent}%",
     "format-icons": ["󰃞", "󰃟", "󰃠"],
     "on-scroll-up": "brightnessctl set 1%+",
-    "on-scroll-down": "brightnessctl set 1%-"
+    "on-scroll-down": "brightnessctl set 1%-",
+    "on-click": "hyprctl dispatch exec $HOME/.config/hypr/shaders/switch_shader.sh"
   },
 
   "battery": {

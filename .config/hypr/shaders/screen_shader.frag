@@ -1,0 +1,1 @@
+/home/corven/.config/hypr/shaders/blue_light.frag
