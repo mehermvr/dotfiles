@@ -1,4 +1,7 @@
-import numpy as np
+try:
+    import numpy as np
+except ModuleNotFoundError:
+    pass
 
 try:
     import torch

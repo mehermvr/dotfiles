@@ -51,6 +51,9 @@ lspconfig.texlab.setup {
         onOpenAndSave = true,
       },
       diagnosticsDelay = 300,
+      diagnostics = {
+        ignoredPatterns = { "\bwrong length of dash\b" },
+      },
       formatterLineLength = 80,
       bibtexFormatter = "texlab",
       latexFormatter = "latexindent",

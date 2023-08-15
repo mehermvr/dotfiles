@@ -1,1 +1,1 @@
-/home/corven/.config/hypr/shaders/blue_light.frag
+/home/corven/.config/hypr/shaders/pass_through.frag
