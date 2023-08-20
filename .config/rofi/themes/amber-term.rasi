@@ -30,7 +30,7 @@ prompt {
 }
 
 listview {
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 }
 mode-switcher {
   enabled: true;
