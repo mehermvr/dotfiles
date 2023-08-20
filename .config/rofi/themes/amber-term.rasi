@@ -1,0 +1,42 @@
+* {
+  /* variables */
+  bg-col: #000;
+  fg-col: #ffb000;
+  border-col: #ffb000;
+  font: "Mononoki Nerd Font 20";
+  background-color: inherit;
+  text-color: inherit;
+}
+
+window {
+  border: 1px;
+  border-color: @border-col;
+  background-color: @bg-col;
+  text-color: @fg-col;
+  padding: 10px;
+}
+
+mainbox {
+  background-color: @bg-col;
+}
+
+inputbar {
+  background-color: @bg-col;
+  padding: 10px;
+}
+
+prompt {
+  background-color: @bg-col;
+}
+
+listview {
+  padding: 10px;
+}
+mode-switcher {
+  enabled: true;
+  border: 1px;
+}
+
+element selected {
+  background-color: rgb(50,50,50);
+}
