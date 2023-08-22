@@ -3,9 +3,10 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- default configs
-local servers = { "cssls", "clangd", "jsonls" }
+local servers = { "cssls", "clangd", "jsonls", "bashls" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,

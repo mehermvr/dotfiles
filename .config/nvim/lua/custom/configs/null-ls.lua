@@ -24,6 +24,8 @@ local sources = {
   formatting.latexindent,
   -- python
   formatting.black,
+  -- bash
+  formatting.shfmt,
   -- misc
   -- formatting.deno_fmt,
   formatting.prettierd.with {

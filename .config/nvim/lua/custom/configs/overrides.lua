@@ -62,6 +62,8 @@ M.mason = {
     "json-lsp",
     "prettierd",
     "texlab",
+    "bash-language-server",
+    "shfmt",
   },
 }
 
