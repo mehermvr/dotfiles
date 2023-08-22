@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim:ft=bash
 function aliased_ssh()
 {
   kitty +kitten themes --reload-in=parent Tokyo Night Moon;

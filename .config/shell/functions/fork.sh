@@ -1,4 +1,4 @@
-#!/bin/bash
+# vim:ft=bash
 fork() {
-    (nohup "$@" >/dev/null 2>&1 &)
+	(nohup "$@" >/dev/null 2>&1 &)
 }

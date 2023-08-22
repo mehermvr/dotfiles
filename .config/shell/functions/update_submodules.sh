@@ -1,4 +1,4 @@
-#!/bin/bash
+# vim:ft=bash
 function update_submodules() {
-  git submodule foreach "git fetch --all && git checkout $1 && git pull"
+	git submodule foreach "git fetch --all && git checkout $1 && git pull"
 }

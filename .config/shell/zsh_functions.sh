@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim:ft=bash
 # functions to use inside a zshell
 # Get the directory of the current script
 # script_dir="$(dirname "$0")/functions"
@@ -8,3 +8,4 @@
 source "$(dirname "$0")/load_function.sh"
 load_function fork
 load_function move_paper
+load_function archive.sh
