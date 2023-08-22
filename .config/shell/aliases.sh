@@ -1,6 +1,4 @@
-source "$(dirname $0)/functions.sh"
 #### alias if exists
-
 if command -v nvim &> /dev/null
 then
         alias vim="nvim"
