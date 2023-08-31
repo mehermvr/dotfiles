@@ -84,6 +84,6 @@ M.nvimtree = {
 }
 
 M.telescope = {
-  extensions_list = { "yank_history" },
+  extensions_list = { "themes", "terms", "yank_history" },
 }
 return M
