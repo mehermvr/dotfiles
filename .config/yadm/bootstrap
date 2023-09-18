@@ -1,110 +1,96 @@
 #!/bin/sh
 
-# follows nachovizzos dotfiles setup: https://github.com/nachovizzo/dotfiles/blob/main/.config/yadm/bootstrap
+script_dir="$(dirname "$0")/functions"
+source "$script_dir/dist_install.sh" # gets me install_package
 
-install_package(){
-	sudo apt install --no-install-recommends -y "$@"
+LOCAL_SRC=$HOME/source
+LOCAL_BIN=$HOME/.local/bin
+
+# takes inspiration from nachovizzos dotfiles setup: https://github.com/nachovizzo/dotfiles/blob/main/.config/yadm/bootstrap
+
+# small change to cloning
+clone_fail_prompt() {
+	if git clone "$@" 2>/dev/null; then
+		return 0
+	else
+		read -n 1 -s -p "Clone failed. Press any key to continue or Ctrl+C to abort..."
+	fi
 }
-
-
-git_clone_or_pull() {
-    local repo_url="$1"
-    local dest_path="$2"
-    local git_options="${@:3}"
-
-    if [ -d "$dest_path" ]; then
-        echo "Directory already exists: $dest_path"
-        cd "$dest_path" && git pull
-    else
-        git clone $git_options "$repo_url" "$dest_path"
-    fi
-}
-
-# fail silent
-clone_fail_silent(){
-	git clone "$@" 2> /dev/null || true
-}
-
 
 # Install ohmyzsh, thanks nacho
-install_zsh(){
+install_zsh() {
 	install_package zsh
 	export CHSH=no
 	export KEEP_ZSHRC=yes
 	export RUNZSH=no
 	ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
-	sudo chsh -s "$(which zsh)" "$USER" 2> /dev/null || chsh -s "$(which zsh)" 
+	sudo chsh -s "$(which zsh)" "$USER" 2>/dev/null || chsh -s "$(which zsh)"
 	# zsh plugins
-	clone_fail_silent --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	clone_fail_silent https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	clone_fail_silent https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+	clone_fail_prompt --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	clone_fail_prompt https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	clone_fail_prompt https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
 }
 
-install_python() {
-  install_package python3 python3-pip python3-dev python-is-python3
-  python3 -m pip install --user --upgrade pip
-  pip install ipython ipdb black
+install_python_utils() {
+	install_package python-pip python3-dev python3-pip python-is-python3
+	python3 -m pip install --user --upgrade pip
+	pip3 install ipython ipdb black
 }
 
 install_build_utils() {
-  install_package build-essential cmake cmake-curses-gui
+	install_package build-essential cmake cmake-curses-gui
 }
-
 
 install_essential_tools() {
-  install_package vim bat btop tree htop ripgrep wget binutils less xdg-utils xclip xsel openssh-client openssh-server sshfs
-  pip3 install thefuck
+	install_package bat btop tree htop ripgrep wget binutils less xdg-utils xclip xsel openssh-client openssh-server sshfs
+	pip3 install thefuck
 }
 
-install_kitty(){
+install_kitty() {
 	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-	ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+	ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten $LOCAL_BIN
+	mkdir -p ~/.local/share/applications
 	cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
 	sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
 	sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-	clone_fail_silent --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
-	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.local/bin/kitty 50
+	clone_fail_prompt --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
+	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $LOCAL_BIN/kitty 50
 }
 
 install_fonts() {
-  	install_package fonts-powerline
-  	clone_fail_silent --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts
-	cd ~/.config/nerd-fonts
+	install_package fonts-powerline
+	clone_fail_prompt --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git $LOCAL_SRC/nerd-fonts
+	cd $LOCAL_SRC/nerd-fonts
 	git sparse-checkout add patched-fonts/Mononoki
 	./install.sh Mononoki
 	cd "$HOME"
 	fc-cache -f -v
 }
 
-install_crap() {
-	# git diff-so-fancy setup
-	clone_fail_silent https://github.com/so-fancy/diff-so-fancy.git ~/.local/src/diff-so-fancy
-	mkdir -p $HOME/.local/bin
-	rm $HOME/.local/bin/diff-so-fancy
-	ln -s $HOME/.local/src/diff-so-fancy/diff-so-fancy $HOME/.local/bin/diff-so-fancy
-
-	# setup esh
-	clone_fail_silent https://github.com/jirutka/esh.git ~/.local/src/esh
-	rm $HOME/.local/bin/esh
-	ln -s $HOME/.local/src/esh/esh $HOME/.local/bin/esh
+install_other_crap() {
 	install_package imagemagick
+	# git diff-so-fancy setup
+	clone_fail_prompt https://github.com/so-fancy/diff-so-fancy.git $LOCAL_SRC/diff-so-fancy
+	mkdir -p $LOCAL_BIN
+	rm $LOCAL_BIN/diff-so-fancy
+	ln -s $LOCAL_SRC/diff-so-fancy/diff-so-fancy $LOCAL_BIN/diff-so-fancy
 }
 
-install_powerline_10k(){
-	clone_fail_silent --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+install_powerline_10k() {
+	clone_fail_prompt --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 }
 
-install_i3(){
-	curl https://baltocdn.com/i3-window-manager/signing.asc | sudo apt-key add -
-	sudo apt install apt-transport-https --yes
-	echo "deb https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main" | sudo tee /etc/apt/sources.list.d/i3-autobuild.list
-	sudo apt update
-	sudo apt install -y i3 feh rofi maim
+install_i3() {
+	# stable
+	/usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2023.02.18_all.deb keyring.deb SHA256:a511ac5f10cd811f8a4ca44d665f2fa1add7a9f09bef238cdfad8461f5239cc4
+	sudo apt install ./keyring.deb
+	echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+	install_package i3 feh rofi maim
 }
 
-install_picom(){
-	clone_fail_silent https://github.com/yshui/picom.git $HOME/.local/src/picom
-	cd $HOME/.local/src/picom
+install_picom() {
+	clone_fail_prompt https://github.com/yshui/picom.git $LOCAL_SRC/picom
+	cd $LOCAL_SRC/picom
 	install_package libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson libxcb-util-dev
 	git submodule update --init --recursive
 	meson setup --buildtype=release . build
@@ -112,33 +98,34 @@ install_picom(){
 	cd $HOME
 }
 
-install_neovim(){
-	clone_fail_silent https://github.com/neovim/neovim.git $HOME/.local/src/neovim
-	cd $HOME/.local/src/neovim
-	instal_package ninja-build gettext cmake unzip curl
-	git checkout stable
-	make CMAKE_BUILD_TYPE=RelWithDebInfo
-	sudo make install 
+install_neovim() {
+	# use the unstable ppa for daily builds
+	install_package software-properties-common
+	sudo add-apt-repository -y ppa:neovim-ppa/unstable
+	install_package neovim
 }
 
-
 cd "$HOME"
-sudo apt update
-export SHELL=$(which zsh)
-yadm remote set-url origin "git@github.com:mehermvr/dotfiles.git"
-
 install_zsh
-install_python
+export SHELL=$(which zsh)
+
+# because now it'll get messy with trying to handle both ubuntu and arch. especiaaallly with stuff like kitty and nvim, we split off. i'll handle arch later when i need it
+if [ "$DISTRO" = "arch" ]; then
+	echo "Unsupported distribution: $DISTRO"
+	exit 1
+fi
+
+install_python_utils
 install_build_utils
 install_essential_tools
 install_kitty
 install_fonts
-install_crap
+install_other_crap
 install_powerline_10k
 install_i3
 install_picom
 install_neovim
 
-# powerline10k setup
+yadm remote set-url origin "git@github.com:mehermvr/dotfiles.git"
 yadm checkout .
 chmod +x $HOME/.fehbg
