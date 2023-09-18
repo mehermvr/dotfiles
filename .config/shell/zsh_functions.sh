@@ -8,4 +8,4 @@
 source "$(dirname "$0")/load_function.sh"
 load_function fork
 load_function move_paper
-load_function archive.sh
+load_function archive
