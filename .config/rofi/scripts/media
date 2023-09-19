@@ -5,7 +5,7 @@ selected_program=$(echo -e "zathura\nmpv" | rofi -dmenu -p "Select a program:")
 
 if [ "$selected_program" == "zathura" ]; then
     # Use find and rofi to select a PDF file
-    selected_file=$(find "$HOME" -type f -name "*.pdf" | rofi -dmenu -i -p "Select a PDF file:")
+    selected_file=$(fd --type f -e pdf . $HOME | rofi -keep-right -dmenu -i -p "Select a PDF file:")
 
     # Check if a valid file is selected before running zathura
     if [ -n "$selected_file" ]; then
@@ -15,7 +15,7 @@ if [ "$selected_program" == "zathura" ]; then
     fi
 elif [ "$selected_program" == "mpv" ]; then
     # Use find and rofi to select a video file
-    selected_file=$(find "$HOME" -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" \) | rofi -dmenu -i -p "Select a video file:")
+    selected_file=$(fd  --type f -e mp4 -e mkv -e avi . $HOME  | rofi -keep-right -dmenu -i -p "Select a video file:")
 
     # Check if a valid file is selected before running mpv
     if [ -n "$selected_file" ]; then
