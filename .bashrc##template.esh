@@ -1,2 +1,0 @@
-<% if [ $(echo "$SHELL") = $(echo "/usr/bin/zsh") ]; then cat $HOME/.config/shell/.bashrc.zsh; else cat $HOME/.config/shell/.bashrc.default; fi %>
-
