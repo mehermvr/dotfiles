@@ -18,13 +18,13 @@
 
 ; need to configure colors
 [colors]
-background = #dd282828
-background-alt = #dd665c54
-foreground = #ebdbb2
-primary = #d79921
-secondary = #98971a
-alert = #cc241d
-disabled = #928374
+background = #1F1F28
+background-alt = #223249
+foreground = #DCD7BA
+primary = #7E9CD8
+secondary = #98BB6C
+alert = #FF5D62
+disabled = #717C7C
 
 [section/base]
 monitor = ${env:MONITOR:DP-4}
