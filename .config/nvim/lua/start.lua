@@ -12,6 +12,7 @@ require("lazy").setup({
     { import = "colorscheme" },
     { import = "plugins" },
     { import = "plugins.lsp" },
+    { import = "plugins.lsp.languages" },
   },
   defaults = {
     -- set this to `true` to have all plugins lazy-loaded by default.

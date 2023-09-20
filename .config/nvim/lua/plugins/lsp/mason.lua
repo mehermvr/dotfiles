@@ -9,6 +9,7 @@ return {
       ensure_installed = {
         "stylua",
         "shfmt",
+        "prettierd",
         -- "flake8",
       },
     },
@@ -30,5 +31,5 @@ return {
         ensure_installed()
       end
     end,
-  }
+  },
 }

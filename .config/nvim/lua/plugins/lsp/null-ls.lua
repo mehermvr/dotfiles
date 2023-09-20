@@ -12,10 +12,11 @@ return {
           nls.builtins.formatting.fish_indent,
           nls.builtins.diagnostics.fish,
           nls.builtins.formatting.stylua,
+          nls.builtins.formatting.prettierd,
           nls.builtins.formatting.shfmt,
           -- nls.builtins.diagnostics.flake8,
         },
       }
     end,
-  }
+  },
 }
