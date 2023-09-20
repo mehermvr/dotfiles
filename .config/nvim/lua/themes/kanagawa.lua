@@ -1,6 +1,10 @@
 local kanagawa = {
   "rebelot/kanagawa.nvim",
   lazy = false,
+  config = function(_, opts)
+    require("kanagawa").setup(opts)
+    vim.cmd([[colorscheme kanagawa]])
+  end,
   overrides = function(colors)
     local theme = colors.theme
     return {
