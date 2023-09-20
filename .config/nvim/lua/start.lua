@@ -9,10 +9,11 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "colorscheme" },
     { import = "plugins" },
     { import = "plugins.lsp" },
     { import = "plugins.lsp.languages" },
+    { import = "plugins.lsp.dap" },
+    { import = "themes.core" },
   },
   defaults = {
     -- set this to `true` to have all plugins lazy-loaded by default.
