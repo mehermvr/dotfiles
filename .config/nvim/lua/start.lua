@@ -1,3 +1,4 @@
+require("options")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
@@ -8,7 +9,9 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "colorscheme"}, {import = "plugins"}, {import = "plugins.lsp"}
+    { import = "colorscheme" },
+    { import = "plugins" },
+    { import = "plugins.lsp" },
   },
   defaults = {
     -- set this to `true` to have all plugins lazy-loaded by default.
@@ -36,4 +39,3 @@ require("lazy").setup({
 
 -- TODO: these can be lazy loaded (they are in LazyVim)
 require("autocmds")
-require("options")

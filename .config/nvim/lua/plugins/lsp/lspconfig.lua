@@ -96,22 +96,20 @@ return {
       -- setup autoformat
       require("external.format").setup(opts)
       -- setup formatting and keymaps
-      -- TODO
-      -- Util.on_attach(function(client, buffer)
-      --   require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-      -- end)
+      Util.on_attach(function(client, buffer)
+        require("external.lsp_keymaps").on_attach(client, buffer)
+      end)
 
       local register_capability = vim.lsp.handlers["client/registerCapability"]
-      -- TODO
-      -- vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-      --   local ret = register_capability(err, res, ctx)
-      --   local client_id = ctx.client_id
-      --   ---@type lsp.Client
-      --   local client = vim.lsp.get_client_by_id(client_id)
-      --   local buffer = vim.api.nvim_get_current_buf()
-      --   require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-      --   return ret
-      -- end
+      vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+        local ret = register_capability(err, res, ctx)
+        local client_id = ctx.client_id
+        ---@type lsp.Client
+        local client = vim.lsp.get_client_by_id(client_id)
+        local buffer = vim.api.nvim_get_current_buf()
+        require("external.lsp_keymaps").on_attach(client, buffer)
+        return ret
+      end
 
       -- diagnostics
       for name, icon in pairs(require("themes.icons").diagnostics) do
