@@ -119,13 +119,6 @@ function M.on_attach(client, buffer)
       opts.buffer = buffer
       local new_keymap = { keys[1], keys[2], mode = keys.mode or "n", opts = opts }
       -- local is_keymap = require("legendary.toolbox").is_keymap(new_keymap)
-      print("keymap:", inspect(new_keymap))
-      -- print(
-      --   "test:",
-      --   require("legendary.toolbox").is_keymap({ "<leader>s", ":wa<CR>", description = "Write all buffers", opts = {} })
-      -- )
-      -- print("is_keymap:", is_keymap) -- Print the value
-      -- if is_keymap then
       require("legendary").keymap(new_keymap)
       -- end
     end

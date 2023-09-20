@@ -39,3 +39,5 @@ require("lazy").setup({
 
 -- TODO: these can be lazy loaded (they are in LazyVim)
 require("autocmds")
+require("keymaps")
+vim.cmd.colorscheme("kanagawa")
