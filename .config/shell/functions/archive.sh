@@ -1,4 +1,8 @@
 #!/bin/bash
+
+script_dir="$(dirname "$0")"
+source "$script_dir/ask.sh"
+
 archive() {
 	if [ $# -ne 1 ]; then
 		echo "Usage: archive path_to_file_or_folder"
@@ -21,10 +25,10 @@ archive() {
 		if cp -r "${target_name}" "${archive_path}"; then
 			echo "Copied ${target_name} to ${archive_path}"
 
-			if rm -r "${target_name}"; then
+			if ask "Remove the original?" N && rm -r "${target_name}"; then
 				echo "Removed original ${target_name}"
 			else
-				echo "Error: Failed to remove original ${target_name}"
+				echo "Did not remove the original either by choice or error: ${target_name}"
 				return 1
 			fi
 		else

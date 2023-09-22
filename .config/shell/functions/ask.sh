@@ -1,6 +1,7 @@
 # vim:ft=bash
 # https://web.archive.org/web/20210922125055/https://gist.github.com/davejamesmiller/1965569
 # usage: ask "test" Y && command
+# [y/N] is added automatically to the prompt based on the default Y/N passed
 ask() {
 	local prompt default reply
 
