@@ -28,7 +28,7 @@ return {
     },
     ---@type TSConfig
     opts = {
-      highlight = { enable = true },
+      highlight = { enable = false }, -- highlights get irritating
       indent = { enable = true },
       ensure_installed = {
         "bash",
