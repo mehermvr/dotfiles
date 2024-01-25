@@ -12,3 +12,7 @@ function env_ros() {
 }
 
 base_ros_setup
+
+noetic_docker_here() {
+  docker run -it --rm -v "$(pwd):/workspace" -w /workspace ros:noetic-ros-base
+}
