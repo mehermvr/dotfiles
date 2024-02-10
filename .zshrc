@@ -33,7 +33,7 @@ if [ -f $HOME/.config/shell/.cudarc ]; then
     . $HOME/.config/shell/.cudarc
 fi
 
-if [ -f $HOME/.config/shell/ros.rc ]; then
+if [ -f /opt/ros/humble.setup.zsh ] && [ -f $HOME/.config/shell/ros.rc ]; then
     . $HOME/.config/shell/ros.rc
 fi
 
