@@ -4,23 +4,24 @@
 selected_program=$(echo -e "zathura\nmpv" | rofi -dmenu -p "Select a program:")
 
 if [ "$selected_program" == "zathura" ]; then
-    # Use find and rofi to select a PDF file
-    selected_file=$(fd --type f -e pdf . $HOME | rofi -keep-right -dmenu -i -p "Select a PDF file:")
+	# Use fd and rofi to select a PDF file
+	# -I is necessary to ignore .gitignore
+	selected_file=$(fd --type f -e pdf -I . $HOME | rofi -keep-right -dmenu -i -p "Select a PDF file:")
 
-    # Check if a valid file is selected before running zathura
-    if [ -n "$selected_file" ]; then
-        zathura "$selected_file"
-    else
-        echo "No file selected."
-    fi
+	# Check if a valid file is selected before running zathura
+	if [ -n "$selected_file" ]; then
+		zathura "$selected_file"
+	else
+		echo "No file selected."
+	fi
 elif [ "$selected_program" == "mpv" ]; then
-    # Use find and rofi to select a video file
-    selected_file=$(fd  --type f -e mp4 -e mkv -e avi . $HOME  | rofi -keep-right -dmenu -i -p "Select a video file:")
+	# Use find and rofi to select a video file
+	selected_file=$(fd --type f -e mp4 -e mkv -e avi . $HOME | rofi -keep-right -dmenu -i -p "Select a video file:")
 
-    # Check if a valid file is selected before running mpv
-    if [ -n "$selected_file" ]; then
-        mpv "$selected_file"
-    else
-        echo "No file selected."
-    fi
+	# Check if a valid file is selected before running mpv
+	if [ -n "$selected_file" ]; then
+		mpv "$selected_file"
+	else
+		echo "No file selected."
+	fi
 fi

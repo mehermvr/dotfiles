@@ -15,7 +15,8 @@ return {
   -- json
   { import = "lazyvim.plugins.extras.lang.json" },
   -- tex
-  { import = "lazyvim.plugins.extras.lang.tex" },
+  -- handled by myself
+  -- { import = "lazyvim.plugins.extras.lang.tex" },
   -- yaml
   { import = "lazyvim.plugins.extras.lang.yaml" },
 }
