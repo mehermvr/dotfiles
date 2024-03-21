@@ -25,12 +25,15 @@ if [ -f $HOME/.config/shell/zsh_functions.sh ]; then
     . $HOME/.config/shell/zsh_functions.sh
 fi
 
-
-if [ -f $HOME/.config/shell/.cudarc ]; then
-    . $HOME/.config/shell/.cudarc
+if [ -f $HOME/.config/shell/conda.rc ]; then
+    . $HOME/.config/shell/conda.rc
 fi
 
-if [ -f /opt/ros/humble.setup.zsh ] && [ -f $HOME/.config/shell/ros.rc ]; then
+if [ -f $HOME/.config/shell/cuda.rc ]; then
+    . $HOME/.config/shell/cuda.rc
+fi
+
+if [ -f /opt/ros/humble/setup.zsh ] && [ -f $HOME/.config/shell/ros.rc ]; then
     . $HOME/.config/shell/ros.rc
 fi
 
@@ -47,9 +50,12 @@ if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
   setcolors $HOME/.config/linux-vt-setcolors/example-colors/terminal.sexy/xcolors.net/mikado
 fi
 
+export PATH=$HOME/.local/bin:/usr/bin:$PATH
 # ssh-agent and ssh-add automatize, needs keychain
 eval $(keychain --eval --quiet --nogui --noask id_ed25519 id_rsa id_ed25519)
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 
