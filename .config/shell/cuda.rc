@@ -1,8 +1,8 @@
 # cuda relevant rc stuff
-export PATH=/usr/local/cuda-11.8/bin${PATH:+:${PATH}}
+export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
 # cuda-11 which symlinks to 11.8
-export CUDA_HOME=/usr/local/cuda-11
+export CUDA_HOME=/usr/local/cuda-12
 # dont know about the following one. theres not really any bins there
 export PATH=/opt/nvidia/nsight-compute${PATH:+:${PATH}}
 # tiny-cuda-nn addition. probably in the official docs, forgor
-export LD_LIBRARY_PATH="/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH"
