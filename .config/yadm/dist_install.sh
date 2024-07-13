@@ -27,3 +27,9 @@ else
 	echo "Unsupported distribution: $DISTRO"
 	exit 1
 fi
+
+# because now it'll get messy with trying to handle both ubuntu and arch. especiaaallly with stuff like kitty and nvim, we split off. i'll handle arch later when i need it
+if [ "$DISTRO" = "arch" ]; then
+	echo "Unsupported distribution: $DISTRO"
+	exit 1
+fi

@@ -1,19 +1,18 @@
 #!/bin/sh
 
-script_dir="$(dirname "$0")/functions"
-source "$script_dir/dist_install.sh" # gets me install_package
+script_dir="$(dirname "$0")"
+source "$script_dir/setup_env.sh"
 
-LOCAL_SRC=$HOME/source
-LOCAL_BIN=$HOME/.local/bin
-
-# takes inspiration from nachovizzos dotfiles setup: https://github.com/nachovizzo/dotfiles/blob/main/.config/yadm/bootstrap
-
-# small change to cloning
-clone_fail_prompt() {
+safe_clone() {
 	if git clone "$@" 2>/dev/null; then
 		return 0
 	else
-		read -n 1 -s -p "Clone failed. Press any key to continue or Ctrl+C to abort..."
+		if [ -z "$NOGUI" ]; then
+			read -n 1 -s -p "Clone failed. Press any key to continue or Ctrl+C to abort..."
+		else
+			echo "Clone failed. Skipping user input due to NOGUI being set."
+		fi
+		return 1
 	fi
 }
 
@@ -26,24 +25,33 @@ install_zsh() {
 	ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
 	sudo chsh -s "$(which zsh)" "$USER" 2>/dev/null || chsh -s "$(which zsh)"
 	# zsh plugins
-	clone_fail_prompt --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	clone_fail_prompt https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	clone_fail_prompt https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+	safe_clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	safe_clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	safe_clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
 }
 
 install_python_utils() {
-	install_package python-pip python3-dev python3-pip python-is-python3
+	install_package python3 python3-dev python3-pip python-is-python3
 	python3 -m pip install --user --upgrade pip
-	pip3 install ipython ipdb black
+	pip3 install ipython ipdb
 }
 
 install_build_utils() {
-	install_package build-essential cmake cmake-curses-gui
+	install_package build-essential cmake
 }
 
 install_essential_tools() {
-	install_package bat btop tree htop ripgrep wget binutils less xdg-utils xclip xsel openssh-client openssh-server sshfs
-	pip3 install thefuck
+	install_package bat btop tree ripgrep less
+}
+
+install_fonts() {
+	install_package fonts-powerline
+	safe_clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git $LOCAL_SRC/nerd-fonts
+	cd $LOCAL_SRC/nerd-fonts
+	git sparse-checkout add patched-fonts/Mononoki
+	./install.sh Mononoki
+	cd "$HOME"
+	fc-cache -f -v
 }
 
 install_kitty() {
@@ -53,31 +61,20 @@ install_kitty() {
 	cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
 	sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
 	sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-	clone_fail_prompt --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
+	safe_clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty-themes
 	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $LOCAL_BIN/kitty 50
 }
 
-install_fonts() {
-	install_package fonts-powerline
-	clone_fail_prompt --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts.git $LOCAL_SRC/nerd-fonts
-	cd $LOCAL_SRC/nerd-fonts
-	git sparse-checkout add patched-fonts/Mononoki
-	./install.sh Mononoki
-	cd "$HOME"
-	fc-cache -f -v
-}
-
-install_other_crap() {
-	install_package imagemagick
+install_diff_so_fancy() {
 	# git diff-so-fancy setup
-	clone_fail_prompt https://github.com/so-fancy/diff-so-fancy.git $LOCAL_SRC/diff-so-fancy
+	safe_clone https://github.com/so-fancy/diff-so-fancy.git $LOCAL_SRC/diff-so-fancy
 	mkdir -p $LOCAL_BIN
 	rm $LOCAL_BIN/diff-so-fancy
 	ln -s $LOCAL_SRC/diff-so-fancy/diff-so-fancy $LOCAL_BIN/diff-so-fancy
 }
 
 install_powerline_10k() {
-	clone_fail_prompt --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	safe_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 }
 
 install_i3() {
@@ -89,7 +86,7 @@ install_i3() {
 }
 
 install_picom() {
-	clone_fail_prompt https://github.com/yshui/picom.git $LOCAL_SRC/picom
+	safe_clone https://github.com/yshui/picom.git $LOCAL_SRC/picom
 	cd $LOCAL_SRC/picom
 	install_package libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson libxcb-util-dev
 	git submodule update --init --recursive
@@ -105,26 +102,29 @@ install_neovim() {
 	install_package neovim
 }
 
+# ============================================
+# start install
+# ============================================
+install_build_utils
+install_essential_tools
+install_python_utils
+
 cd "$HOME"
 install_zsh
 export SHELL=$(which zsh)
-
-# because now it'll get messy with trying to handle both ubuntu and arch. especiaaallly with stuff like kitty and nvim, we split off. i'll handle arch later when i need it
-if [ "$DISTRO" = "arch" ]; then
-	echo "Unsupported distribution: $DISTRO"
-	exit 1
-fi
-
-install_python_utils
-install_build_utils
-install_essential_tools
-install_kitty
 install_fonts
-install_other_crap
 install_powerline_10k
-install_i3
-install_picom
+
 install_neovim
+
+if [ -z "$NOGUI" ]; then
+	install_kitty
+# install_i3
+# install_picom
+# install_diff_so_fancy
+else
+	echo "NOGUI is set. Skipping GUI-related commands."
+fi
 
 yadm remote set-url origin "git@github.com:mehermvr/dotfiles.git"
 yadm checkout .
