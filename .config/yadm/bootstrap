@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Trying to source $HOME/.config/yadm/setup_env.sh"
-source "$HOME/.config/yadm/setup_env.sh"
+. "$HOME/.config/yadm/setup_env.sh"
 
 safe_clone() {
 	if git clone "$@" 2>/dev/null; then
