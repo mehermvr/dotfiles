@@ -10,6 +10,7 @@ mkdir -p "$LOCAL_SRC"
 mkdir -p "$LOCAL_BIN"
 
 # setup yadm
+rm "$LOCAL_SRC/yadm" "$LOCAL_BIN/yadm" -rf
 git clone https://github.com/TheLocehiliosan/yadm.git "$LOCAL_SRC"/yadm
 ln -s "$LOCAL_SRC"/yadm/yadm "$LOCAL_BIN"/yadm
 

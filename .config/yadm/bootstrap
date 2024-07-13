@@ -114,7 +114,7 @@ install_picom() {
 install_neovim() {
 	log_install "installing neovim"
 	# use the unstable ppa for daily builds
-	install_package software-properties-common
+	install_package software-properties-common gpg-agent
 	sudo add-apt-repository -y ppa:neovim-ppa/unstable
 	install_package neovim
 }
