@@ -14,4 +14,4 @@ git clone https://github.com/TheLocehiliosan/yadm.git "$LOCAL_SRC"/yadm
 ln -s "$LOCAL_SRC"/yadm/yadm "$LOCAL_BIN"/yadm
 
 yadm clone -f --no-bootstrap https://github.com/mehermvr/dotfiles.git
-yadm bootstrap
+. $HOME/.config/yadm/bootstrap
