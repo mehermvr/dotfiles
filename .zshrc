@@ -25,9 +25,6 @@ if [ -f $HOME/.config/shell/zsh_functions.sh ]; then
     . $HOME/.config/shell/zsh_functions.sh
 fi
 
-if [ -f $HOME/.config/shell/.condarc ]; then
-    . $HOME/.config/shell/.condarc
-fi
 
 if [ -f $HOME/.config/shell/.cudarc ]; then
     . $HOME/.config/shell/.cudarc
@@ -39,6 +36,9 @@ fi
 
 if [ -f $HOME/.config/shell/virtualenv.sh ]; then
     . $HOME/.config/shell/virtualenv.sh
+fi
+if [ -f $HOME/.config/shell/.condarc ]; then
+    . $HOME/.config/shell/.condarc
 fi
 
 # theme the tty to rose pine moon
