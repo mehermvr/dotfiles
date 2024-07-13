@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/yadm/setup_env.sh >>/tmp/setup_env.sh
-source /tmp/setup_env.sh
+. /tmp/setup_env.sh
 
 install_package git curl
 

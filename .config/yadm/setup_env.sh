@@ -6,10 +6,10 @@ PATH=$LOCAL_BIN:$PATH
 
 # Detect the Linux distribution
 if [ -f /etc/os-release ]; then
-	source /etc/os-release
+	. /etc/os-release
 	DISTRO="$ID"
 elif [ -f /etc/lsb-release ]; then
-	source /etc/lsb-release
+	. /etc/lsb-release
 	DISTRO="$DISTRIB_ID"
 else
 	echo "Unsupported distribution"
