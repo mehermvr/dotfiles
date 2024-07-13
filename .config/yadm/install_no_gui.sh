@@ -2,5 +2,4 @@
 
 export NOGUI=1
 
-script_dir="$(dirname "$0")"
-source "$script_dir/install.sh"
+sh -c "$(curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/yadm/install.sh)"
