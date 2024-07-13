@@ -1,7 +1,6 @@
 #!/bin/bash
 
-script_dir="$(dirname "$0")"
-source "$script_dir/setup_env.sh"
+sh -c "$(curl -L https://raw.githubusercontent.com/mehermvr/dotfiles/master/.config/yadm/setup_env.sh)"
 
 install_package git curl
 
