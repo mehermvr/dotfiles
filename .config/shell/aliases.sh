@@ -1,29 +1,25 @@
 #### alias if exists
-if command -v nvim &> /dev/null
-then
-        alias vim="nvim"
+if command -v nvim &>/dev/null; then
+	alias vim="nvim"
 else
-        echo "nvim could not be found, not aliasing it to vim"
+	echo "nvim could not be found, not aliasing it to vim"
 fi
 
-if command -v btop &> /dev/null
-then
-        alias htop="btop"
+if command -v btop &>/dev/null; then
+	alias htop="btop"
 else
-        echo "btop could not be found, not aliasing it to htop"
+	echo "btop could not be found, not aliasing it to htop"
 fi
 
-if command -v bat &> /dev/null
-then
-        alias cat="bat"
+if command -v bat &>/dev/null; then
+	alias cat="bat"
 else
-        if command -v batcat &> /dev/null
-        then
-                alias cat="batcat"
-        else
-                echo "bat could not be found, not aliasing it to cat"
- 
-        fi
+	if command -v batcat &>/dev/null; then
+		alias cat="batcat"
+	else
+		echo "bat could not be found, not aliasing it to cat"
+
+	fi
 fi
 
 # For a full list of active aliases, run `alias`.
@@ -45,4 +41,3 @@ alias reload_theme="kitty +kitten themes --reload-in=parent Gruvbox Dark"
 alias ckb='cmake -Bbuild . && cmake --build build -j$(nproc)'
 alias set_us="setxkbmap -layout us"
 alias set_de="setxkbmap -layout de"
-

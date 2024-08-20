@@ -8,11 +8,17 @@ function env_ros() {
 	# source /usr/share/colcon_cd/function/colcon_cd.sh
 	# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 	# export _colcon_cd_root=/opt/ros/iron/
-	# source $HOME/work/robots/ros2_ws/install/setup.zsh
+	source $HOME/ros_ws/install/setup.zsh
 }
 
 base_ros_setup
+alias rcb="colcon build --symlink-install"
+alias rcc="rm build install log -rf"
 
-noetic_docker_here() {
-  docker run -it --rm -v "$(pwd):/workspace" -w /workspace ros:noetic-ros-base
+noetic_docker_here () {
+    if [ -n "$DATA_DIR" ]; then
+        docker run -it --rm -v "$(pwd):/home/dev/ros_ws" -v "$DATA_DIR:/data" ros_noetic_dev
+    else
+        docker run -it --rm -v "$(pwd):/home/dev/ros_ws" ros_noetic_dev
+    fi
 }
