@@ -5,7 +5,7 @@ return {
     lazy = false,
     keys = {
       { "<leader>?", "<cmd>Legendary keymaps<cr>", desc = "Toggle Legendary keymap search." },
-      { "<leader>ch", "<cmd>Legendary keymaps<cr>", desc = "Toggle Legendary keymap search." },
+      { "<leader>km", "<cmd>Legendary keymaps<cr>", desc = "Toggle Legendary keymap search." },
     },
     opts = {
       extensions = {

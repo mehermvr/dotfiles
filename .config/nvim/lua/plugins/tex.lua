@@ -1,20 +1,11 @@
 return {
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<localLeader>l"] = { name = "+vimtex" },
-      },
-    },
-  },
-
   -- Add BibTeX/LaTeX to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
+      opts.highlight = opts.highlight or {}
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "bibtex", "latex" })
+        vim.list_extend(opts.ensure_installed, { "bibtex" })
       end
       if type(opts.highlight.disable) == "table" then
         vim.list_extend(opts.highlight.disable, { "latex" })
@@ -31,7 +22,12 @@ return {
       vim.g.vimtex_view_method = "zathura"
       vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
+      -- doesn't open the quickfix window automatically if there are just warnings and no errors
+      vim.g.vimtex_quickfix_open_on_warning = 0
     end,
+    keys = {
+      { "<localLeader>l", "", desc = "+vimtext" },
+    },
   },
 
   -- Correctly setup lspconfig for LaTeX 🚀
