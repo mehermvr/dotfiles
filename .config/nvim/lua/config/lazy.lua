@@ -29,6 +29,10 @@ require("lazy").setup({
   checker = { enabled = false, notify = false },
   -- disable runtime plugins. i think these come from nvim by default. the following selection is lazy.nvim's defaults, but there's a few more
   performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" } } },
+  change_detection = {
+    enabled = true,
+    notify = false, -- the notification is fucking irritationg whenever you modify the config
+  },
 })
 
 -- load keymaps after plugins

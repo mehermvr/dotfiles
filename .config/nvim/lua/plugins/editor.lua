@@ -9,55 +9,36 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-    keys = {
-      {
-        "<leader>e",
-        function()
-          local root_dir = util.find_project_root()
-          require("neo-tree.command").execute({ toggle = true, dir = root_dir })
-        end,
-        desc = "Explorer NeoTree (Root)",
-      },
+    opts = {
+      close_if_last_window = true,
+      popup_border_style = "rounded",
+      enable_git_status = true,
+      enable_diagnostics = true,
     },
-    config = function()
+    config = function(_, opts)
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
       vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
       vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
       vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
       vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
-      require("neo-tree").setup({
-        -- neotree has way too much fucking default config and mappings. im not bothering with all that
-        close_if_last_window = true,
-        popup_border_style = "rounded",
-        enable_git_status = true,
-        enable_diagnostics = true,
-      })
+      require("neo-tree").setup(opts)
     end,
-  },
-  {
-    -- TODO: for some reason this thing fails when i open a file after doing 'vim' and then file
-    "akinsho/bufferline.nvim",
-    event = { "VeryLazy" },
-    dependencies = "nvim-tree/nvim-web-devicons",
-    opts = {
-      options = {
-        mode = "buffers",
-        show_close_icon = false,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "File Explorer",
-            highlight = "Directory",
-            separator = true,
-          },
-        },
+    keys = {
+      {
+        "<leader>e",
+        function()
+          local root_dir = util.find_project_root()
+          require("neo-tree.command").execute({ toggle = true, dir = root_dir, reveal_file = vim.fn.expand("%:p") })
+        end,
+        desc = "Explorer NeoTree (Root)",
       },
     },
   },
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    -- event = "VeryLazy",
     opts = function()
       return {
         options = {
@@ -86,45 +67,25 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       {
-        "<leader>ff",
+        "<leader>f",
         function()
           require("fzf-lua").files({ cwd = util.find_project_root() })
         end,
         desc = "Find files in root dir",
       },
       {
-        "<leader>fg",
+        "<leader>g",
         function()
           require("fzf-lua").live_grep({ cwd = util.find_project_root() })
         end,
         desc = "Grep in root dir",
       },
       {
-        "<leader>fb",
+        "<leader>b",
         function()
           require("fzf-lua").buffers()
         end,
         desc = "Fzf the buffers",
-      },
-    },
-  },
-  {
-    -- TODO: this thing is deprecated, but there is no easier way to delete buffers
-    "famiu/bufdelete.nvim",
-    keys = {
-      {
-        "<leader>bd",
-        function()
-          require("bufdelete").bufdelete(0)
-        end,
-        desc = "Delete current buffer",
-      },
-      {
-        "<leader>bD",
-        function()
-          require("bufdelete").bufdelete(0, true)
-        end,
-        desc = "Force delete current buffer",
       },
     },
   },
@@ -155,6 +116,83 @@ return {
     },
     keys = {
       { "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
+    },
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    main = "ibl",
+    opts = function()
+      return {
+        exclude = {
+          filetypes = { "dashboard" },
+        },
+      }
+    end,
+  },
+  {
+    "echasnovski/mini.comment",
+    opts = {},
+    event = { "VeryLazy" },
+  },
+  { "echasnovski/mini.pairs", opts = {}, event = { "VeryLazy" } },
+  { "echasnovski/mini.cursorword", opts = {}, event = { "VeryLazy" } },
+  {
+    "echasnovski/mini.bufremove",
+    opts = {},
+    keys = {
+      {
+        "<leader>db",
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete current buffer",
+      },
+      {
+        "<leader>Db",
+        function()
+          require("mini.bufremove").delete(0, true)
+        end,
+        desc = "Force delete current buffer",
+      },
+    },
+  },
+  -- TODO: mini.pick might be useful later
+  {
+    "smjonas/inc-rename.nvim",
+    opts = {},
+    keys = {
+      {
+        "<leader>rn",
+        function()
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end,
+        expr = true,
+        mode = "n",
+        desc = "Rename symbol under cursor",
+      },
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    opts = {},
+    cmd = "GrugFar",
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          local grug = require("grug-far")
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          grug.open({
+            transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "v" }, -- Normal and visual modes
+        desc = "Search and Replace",
+      },
     },
   },
 }

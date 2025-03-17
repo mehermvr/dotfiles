@@ -7,10 +7,19 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
+    keys = {
+      { "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto Definition" },
+      { "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Goto Declaration" },
+      { "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Goto Implementation" },
+      { "gr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "References" },
+      { "K", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Hover Documentation" },
+      { "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help" },
+      { "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Actions" },
+    },
     -- configure servers by opts, and then this gets used in config generically to do server.setup(server_opts)
     opts = {
       servers = {
-        clangd = {},
+        -- see clangd.lua for clangd, and lua_ls.lua for lua_ls since they're a bit more complicated
         pyright = {},
         neocmake = {},
         bashls = {
@@ -20,35 +29,8 @@ return {
         dockerls = {},
         jsonls = {},
         marksman = {},
+        texlab = {},
         yamlls = {},
-        lua_ls = {
-          -- ripped from the docs
-          on_init = function(client)
-            if client.workspace_folders then
-              local path = client.workspace_folders[1].name
-              if
-                path ~= vim.fn.stdpath("config")
-                and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
-              then
-                return
-              end
-            end
-            client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
-              runtime = {
-                version = "LuaJIT",
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                },
-              },
-            })
-          end,
-          settings = {
-            Lua = {},
-          },
-        },
       },
     },
     -- splitting off server config in opts to do the blink.cmp capabilities stuff here

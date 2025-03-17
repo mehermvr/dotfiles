@@ -1,40 +1,46 @@
-# Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
+# https://i3wm.org/docs/userguide.html
 
-# i3 config file (v4)
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
-# define stuff needed by sub conf files
 # Kanagawa - base16 order
+# set $bg #1F1F28
+# set $bg1 #2A2A37
+# set $bg2 #223249
+# set $gray #727169
+# set $fg2 #C8C093
+# set $fg #DCD7BA
+# set $fg1 #938AA9
+# set $base07 #363646
+# set $base08 #C34043
+# set $highlight1 #FFA066
+# set $highlight2 #DCA561
+# set $text #98BB6C
+# set $special #7FB4CA
+# set $title #7E9CD8
+# set $keyword #957FB8
+# set $number #D27E99
+
+# kanagawa paper using ai
 set $bg #1F1F28
-set $bg1 #2A2A37
-set $bg2 #223249
-set $gray #727169
-set $fg2 #C8C093
+set $bg1 #0d0c0c
+set $bg2 #a6a69c
+set $gray #C8C093
+set $fg2 #c5c9c5
 set $fg #DCD7BA
 set $fg1 #938AA9
-set $base07 #363646
-set $base08 #C34043
-set $highlight1 #FFA066
-set $highlight2 #DCA561
-set $text #98BB6C
+set $base07 #658594
+set $base08 #c4746e
+set $highlight1 #E46876
+set $highlight2 #E6C384
+set $text #8a9a7b
 set $special #7FB4CA
-set $title #7E9CD8
-set $keyword #957FB8
-set $number #D27E99
+set $title #8ba4b0
+set $keyword #a292a3
+set $number #b6927b
 
-# # gruvbox
-# set $bg #282828
-# set $red #cc241d
-# set $green #98971a
-# set $yellow #d79921
-# set $blue #458588
-# set $purple #b16286
-# set $aqua #689d68
-# set $gray #a89984
-# set $darkgray #1d2021
-# set $lightgray #bdae93
-#
+# monitor aliases
+set $display_1 "DP-6"
+set $display_2 "DP-4"
+set $display_3 "DP-0"
+set $display_4 "DP-2"
 set $mod Mod1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
