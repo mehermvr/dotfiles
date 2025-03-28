@@ -2,7 +2,7 @@ return {
   -- kinda ripped from lazyvim
   {
     "lervag/vimtex",
-    enabled = true,
+    enabled = false,
     lazy = false, -- lazy-loading will disable inverse search
     config = function()
       vim.g.vimtex_view_method = "zathura"
