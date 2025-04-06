@@ -147,12 +147,13 @@ install_fonts
 install_powerline_10k
 
 install_neovim
+install_neovim_config_deps
 
 if [ -z "$NOGUI" ]; then
 	install_kitty
-# install_i3
-# install_picom
-# install_diff_so_fancy
+	# install_i3
+	# install_picom
+	# install_diff_so_fancy
 else
 	echo "NOGUI is set. Skipping GUI-related commands."
 fi
