@@ -37,6 +37,7 @@ return {
     config = function(_, opts)
       local mason_lspconfig = require("mason-lspconfig")
       mason_lspconfig.setup({
+        automatic_enable = false, -- there's some problem with this one and mason config breaking changes. redo this entire thing later with after/lsp style stuff
         ensure_installed = vim.tbl_keys(opts.servers),
       })
 
