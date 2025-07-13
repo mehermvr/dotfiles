@@ -195,4 +195,12 @@ return {
       },
     },
   },
+  {
+    "shrynx/line-numbers.nvim",
+    opts = {
+      mode = "relative", -- Use LineNumberBoth or Toggle to switch around
+      format = "abs_rel",
+      separator = " ",
+    },
+  },
 }

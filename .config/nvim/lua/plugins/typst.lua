@@ -1,3 +1,5 @@
+local util = require("config.util")
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -7,8 +9,8 @@ return {
           settings = {
             formatterMode = "typstyle",
             exportPdf = "onSave",
-            outputPath = "$root/target/$dir/$name",
-            semanticTokens = "disable",
+            outputPath = "$root/build/$dir/$name",
+            semanticTokens = "enable",
           },
         },
       },
@@ -23,6 +25,7 @@ return {
       dependencies_bin = {
         ["tinymist"] = "tinymist",
       },
+      get_root = util.find_project_root,
     },
     keys = {
       -- mapping stuff from typst-preview's docs
