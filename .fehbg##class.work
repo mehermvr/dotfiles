@@ -1,2 +1,6 @@
 #!/bin/sh
-/usr/bin/feh --no-fehbg --bg-fill '/home/meher/pictures/wallpapers/2mons_left.png' '/home/meher/pictures/wallpapers/EldenRing-Map-8kcrop.png' '/home/meher/pictures/wallpapers/ys_dawn_of_ys.jpg'
+/usr/bin/feh --no-fehbg --bg-fill \
+  '/home/meher/pictures/wallpapers/ys_dawn_of_ys.jpg' \
+  '/home/meher/pictures/wallpapers/messmer_promotion_art.jpg' \
+  '/home/meher/pictures/wallpapers/nightreign_gang_cropped_vertical.png' \
+  '/home/meher/pictures/wallpapers/ghost_in_the_shell_spider_tank_upscayl_1x_high-fidelity-4x.png' # '/home/meher/pictures/wallpapers/armored core vertical wallpaper.png' \

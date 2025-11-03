@@ -49,13 +49,31 @@ fi
 if [ -f $HOME/.local/bin/setcolors -a "$TERM" = "linux" ]; then
   setcolors $HOME/.config/linux-vt-setcolors/example-colors/terminal.sexy/xcolors.net/mikado
 fi
+#
+# Development options
+export _TYPER_STANDARD_TRACEBACK=1
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
-export PATH=$HOME/.local/bin:/usr/bin:$PATH
 # ssh-agent and ssh-add automatize, needs keychain
 eval $(keychain --eval --quiet --nogui --noask id_ed25519 id_rsa id_ed25519)
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# some node bullshit
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
+
+carla_environment() {
+    source "/home/meher/work/teaching/sdc_carla/py37env/bin/activate"
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
 

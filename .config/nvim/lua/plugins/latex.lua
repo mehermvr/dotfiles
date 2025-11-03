@@ -2,7 +2,7 @@ return {
   -- kinda ripped from lazyvim
   {
     "lervag/vimtex",
-    enabled = false,
+    enabled = true,
     lazy = false, -- lazy-loading will disable inverse search
     config = function()
       vim.g.vimtex_view_method = "zathura"
@@ -10,6 +10,9 @@ return {
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
       -- doesn't open the quickfix window automatically if there are just warnings and no errors
       vim.g.vimtex_quickfix_open_on_warning = 0
+      vim.g.vimtex_compiler_latexmk = {
+        out_dir = "build",
+      }
     end,
     keys = {
       { "<localLeader>l", "", desc = "+vimtex", ft = "tex" },

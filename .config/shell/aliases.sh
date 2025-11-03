@@ -41,3 +41,43 @@ alias reload_theme="kitty +kitten themes --reload-in=parent Gruvbox Dark"
 alias ckb='cmake -Bbuild . && cmake --build build -j$(nproc)'
 alias set_us="setxkbmap -layout us"
 alias set_de="setxkbmap -layout de"
+
+traj_plot() {
+	if [ "$#" -lt 2 ]; then
+		echo "Usage: traj_plot <ref_file> <file1> [file2 ... fileN]"
+		return 1
+	fi
+
+	# The first argument is the reference file
+	local ref_file="$1"
+
+	shift
+
+	evo_traj tum -vap --plot_mode=xy --ref "$ref_file" "$@"
+}
+traj_rpe() {
+	if [ "$#" -lt 2 ]; then
+		echo "Usage: traj_rpe <ref_file> <file1> [file2 ... fileN]"
+		return 1
+	fi
+
+	# The first argument is the reference file
+	local ref_file="$1"
+
+	shift
+
+	evo_rpe tum -vap --plot_mode=xy "$ref_file" "$@"
+}
+traj_ape() {
+	if [ "$#" -lt 2 ]; then
+		echo "Usage: traj_ape <ref_file> <file1> [file2 ... fileN]"
+		return 1
+	fi
+
+	# The first argument is the reference file
+	local ref_file="$1"
+
+	shift
+
+	evo_ape tum -vap --plot_mode=xy "$ref_file" "$@"
+}

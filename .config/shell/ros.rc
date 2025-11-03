@@ -1,24 +1,49 @@
 # vim:ft=bash
-function base_ros_setup(){
+function base_ros_setup() {
   source /opt/ros/humble/setup.zsh
   complete -o nospace -o default -F _python_argcomplete "ros2"
 }
-function env_ros() {
-	export ROS_DOMAIN_ID=0
-	# source /usr/share/colcon_cd/function/colcon_cd.sh
-	# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
-	# export _colcon_cd_root=/opt/ros/iron/
-	source $HOME/ros_ws/install/setup.zsh
+
+function rmw_cyclonedds_setup() {
+  export RMEM_MAX=$(sysctl net.core.rmem_max 2>/dev/null | grep -o -E '[0-9]+')
+  export RMEM_MAX_EXPECTED="2147483647" # 2GiB
+  export CYCLONEDDS_URI=${CYCLONEDDS_URI:-"<CycloneDDS><Domain><General><Interfaces><NetworkInterface name=\"lo\"/></Interfaces><AllowMulticast>true</AllowMulticast></General><Discovery><ParticipantIndex>none</ParticipantIndex></Discovery></Domain></CycloneDDS><Gen><Allow>spdp</Allow></Gen>"}
+  export ROS_AUTOMATIC_DISCOVERY_RANGE=${ROS_AUTOMATIC_DISCOVERY_RANGE:-SUBNET}
+  export RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION:-rmw_cyclonedds_cpp}
 }
 
-base_ros_setup
-alias rcb="colcon build --symlink-install"
+function rmw_zenoh_setup() {
+  export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+}
+
+function colcon_setup() {
+  source /usr/share/colcon_cd/function/colcon_cd.sh
+  source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+  export _colcon_cd_root=/opt/ros/iron/
+}
+
+function noetic_docker_here() {
+  noetic_docker_here() {
+    local compose_file="/home/meher/work/git/pb_docker_utils/ros_noetic/compose.yaml"
+    touch $(pwd)/docker_zsh_history.txt
+
+    if [ -n "$DATA_DIR" ]; then
+      DATA_DIR="${DATA_DIR}" FUNC_CALL_DIR="$(pwd)" docker compose -f "$compose_file" run --rm noetic_dev
+    else
+      FUNC_CALL_DIR="$(pwd)" docker compose -f "$compose_file" run --rm noetic_dev
+    fi
+  }
+}
+
+alias rcb="colcon build --symlink-install --event-handlers console_direct+"
 alias rcc="rm build install log -rf"
 
-noetic_docker_here () {
-    if [ -n "$DATA_DIR" ]; then
-        docker run -it --rm -v "$(pwd):/home/dev/ros_ws" -v "$DATA_DIR:/data" ros_noetic_dev
-    else
-        docker run -it --rm -v "$(pwd):/home/dev/ros_ws" ros_noetic_dev
-    fi
+base_ros_setup
+# rmw_cyclonedds_setup
+rmw_zenoh_setup
+
+function source_ros() {
+  # export ROS_DOMAIN_ID=0 # unnecessary with zenoh
+  # colcon_setup
+  source $HOME/ros_ws/ros2/install/local_setup.zsh
 }
