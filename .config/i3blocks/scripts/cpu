@@ -1,0 +1,12 @@
+#!/bin/bash
+color_background=#1F1F28
+color_primary=#7E9CD8   # waveBlue
+color_secondary=#98BB6C # waveGreen
+color_alert=#FF5D62     # waveRed
+color_text=#DCD7BA      # fujiWhite
+color_accent=#E6C384    # waveYellow
+
+usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}')
+echo "󰻠 ${usage}%"
+echo "CPU ${usage}%"
+echo "$color_primary"

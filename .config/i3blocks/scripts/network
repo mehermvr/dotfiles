@@ -1,0 +1,22 @@
+#!/bin/bash
+color_background=#1F1F28
+color_primary=#7E9CD8   # waveBlue
+color_secondary=#98BB6C # waveGreen
+color_alert=#FF5D62     # waveRed
+color_text=#DCD7BA      # fujiWhite
+color_accent=#E6C384    # waveYellow
+
+# Check connection priority: Ethernet > WiFi
+if ip link show eno1 | grep -q "state UP"; then
+	ip=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+	echo "󰈀 $ip"
+	echo "$color_secondary"
+elif iwgetid -r >/dev/null; then
+	ssid=$(iwgetid -r)
+	ip=$(ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}' || echo "Disconnected")
+	echo "󰖩 ${ssid:0:15} $ip"
+	echo "#98971A" # WiFi color
+else
+	echo "󰖪 Offline"
+	echo "$color_alert"
+fi

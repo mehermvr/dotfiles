@@ -1,0 +1,20 @@
+#!/bin/bash
+color_background=#1F1F28
+color_primary=#7E9CD8   # waveBlue
+color_secondary=#98BB6C # waveGreen
+color_alert=#FF5D62     # waveRed
+color_text=#DCD7BA      # fujiWhite
+color_accent=#E6C384    # waveYellow
+
+# Get current status
+muted=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
+
+# Format output
+if [ "$muted" = "yes" ]; then
+	echo "󰖁 --%"
+	echo "󰖁 Mute"
+	echo "$color_accent"
+else
+	echo "󰕾 $volume"
+fi

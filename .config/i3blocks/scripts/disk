@@ -1,0 +1,12 @@
+#!/bin/bash
+color_background=#1F1F28
+color_primary=#7E9CD8   # waveBlue
+color_secondary=#98BB6C # waveGreen
+color_alert=#FF5D62     # waveRed
+color_text=#DCD7BA      # fujiWhite
+color_accent=#E6C384    # waveYellow
+
+usage=$(df -h / | awk 'NR==2 {print $5}')
+echo " ${usage}"
+echo "Disk ${usage}"
+echo "$color_text"

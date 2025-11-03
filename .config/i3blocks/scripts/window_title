@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+from i3ipc import Connection, Event
+
+def print_focused_title(i3, event):
+    focused = i3.get_tree().find_focused()
+    title = focused.name or "No focused window"
+    # Truncate if needed (100 chars)
+    TRUNC = 100
+    if len(title) > TRUNC:
+        title = title[:TRUNC] + "..."
+    print(title, flush=True)
+
+i3 = Connection()
+i3.on(Event.WINDOW_FOCUS, print_focused_title)
+# Print initial title
+print_focused_title(i3, None)
+i3.main()
